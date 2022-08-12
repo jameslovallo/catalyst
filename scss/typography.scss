@@ -1,0 +1,127 @@
+:root {
+	--ui-family: system-ui;
+	font-family: sans-serif;
+	line-height: 1.5;
+}
+// prettier-ignore
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	display: block;
+	font-family: var(--heading-font);
+	color: var(--heading-color);
+	margin: 0;
+	line-height: 1.2;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+
+	.grid>.text &:first-child:last-child {
+		margin: 0;
+	}
+
+	article & {
+		margin-top: 1em;
+	}
+}
+
+h1,
+.h1 {
+	font-size: var(--h1-font-size, 2.5rem);
+	line-height: var(--h1-line-height, 1.2);
+}
+
+@media screen and (min-width: 521px) {
+	h1,
+	.h1 {
+		font-size: 3.125rem;
+	}
+}
+
+@media screen and (min-width: 921px) {
+	h1,
+	.h1 {
+		font-size: 3.75rem;
+	}
+}
+
+h2,
+.h2 {
+	font-size: var(--h2-font-size, 1.5rem);
+	line-height: var(--h2-line-height, 1.2);
+}
+
+@media screen and (min-width: 521px) {
+	h2,
+	.h2 {
+		font-size: 1.75rem;
+	}
+}
+
+@media screen and (min-width: 921px) {
+	h2,
+	.h2 {
+		font-size: 2rem;
+	}
+}
+
+h2:focus {
+	outline: none;
+}
+
+h3,
+.h3 {
+	font-size: var(--h3-font-size, 1.375rem);
+	line-height: var(--h3-line-height, 1.2);
+}
+
+@media screen and (min-width: 521px) {
+	h3,
+	.h3 {
+		font-size: 1.375rem;
+	}
+}
+
+@media screen and (min-width: 921px) {
+	h3,
+	.h3 {
+		font-size: 1.5rem;
+	}
+}
+
+h4,
+.h4 {
+	font-size: var(--h4-font-size, 1.25rem);
+	line-height: var(--h4-line-height, 1.625rem);
+}
+
+h5,
+.h5 {
+	font-size: var(--h5-font-size, 1.125rem);
+	line-height: var(--h5-line-height, 1.333);
+}
+
+h6,
+.h6 {
+	font-size: var(--h6-font-size, 1rem);
+	line-height: var(--h6-line-height, 2rem);
+}
+
+.p {
+	font-size: 16px;
+	display: block;
+}
+
+.small {
+	font-size: 14px;
+}
+
+.truncate {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	display: block;
+}
+
+blockquote {
+	margin: 1em 0;
+	padding: 1px 0 1px 2em;
+	border-left: 4px solid var(--primary);
+}
