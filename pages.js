@@ -1,9 +1,13 @@
-import { renderRichText } from '@storyblok/js'
+import { apiPlugin, renderRichText, storyblokInit } from '@storyblok/js'
 import fs from 'fs'
 import { JSDOM } from 'jsdom'
-import fetch from 'node-fetch'
+const { document } = new JSDOM().window
 
-const token = process.env.storyblok
+const { storyblokApi } = storyblokInit({
+	accessToken: process.env.storyblok,
+	use: [apiPlugin],
+})
+
 let template = ''
 
 fs.readFile('./index.html', 'utf8', (error, data) => {
@@ -12,109 +16,81 @@ fs.readFile('./index.html', 'utf8', (error, data) => {
 	} else template = data
 })
 
-const getPages = () => {
-	const url = [
-		'https://api.storyblok.com/v1/cdn/links/',
-		`?token=${token}`,
-		'&version=published',
-	].join('')
+async function buildSite() {
+	const { data } = await storyblokApi.get('cdn/stories', {
+		version: 'published',
+	})
 
-	fetch(url)
-		.then((res) => res.json())
-		.then((json) => {
-			Object.keys(json.links).forEach((key) => {
-				const link = json.links[key]
-				link.slug !== 'settings' && writePage(link.real_path)
-			})
-		})
+	data?.stories.forEach((story) => {
+		if (story.slug !== 'settings') {
+			renderStory(story)
+		}
+	})
 }
 
-const writePage = (slug) => {
-	const { document } = new JSDOM().window
+const renderBloks = (array, target, slot) => {
+	array.forEach((blok) => {
+		if (!blok.component) return
 
-	const renderBloks = (array, target, slot) => {
-		array.forEach((blok) => {
-			if (!blok.component) return
+		const tag = `c-${blok.component.toLowerCase()}`
+		const el = document.createElement(tag)
 
-			const tag = `c-${blok.component.toLowerCase()}`
-			const el = document.createElement(tag)
+		if (slot) el.setAttribute('slot', slot)
 
-			if (slot) el.setAttribute('slot', slot)
+		const attrs = Object.keys(blok).filter((key) => !['component', '_uid'].includes(key))
 
-			const attrs = Object.keys(blok).filter(
-				(key) => !['component', '_uid'].includes(key)
-			)
+		attrs.forEach((attr) => {
+			const value = blok[attr]
 
-			attrs.forEach((attr) => {
-				const value = blok[attr]
-
-				if (typeof value === 'boolean') {
-					el.setAttribute(attr, value)
-				}
-
-				if (typeof value === 'string' && value) {
-					if (attr === 'style') attr = 'variant'
-					el.setAttribute(attr, value)
-				}
-
-				if (typeof value === 'object') {
-					if (Array.isArray(value) && value[0]?.component) {
-						renderBloks(value, el, attr)
-					} else {
-						el.setAttribute(attr, JSON.stringify(value))
-					}
-				}
-			})
-
-			if (blok.component === 'TextRich') {
-				el.innerHTML = renderRichText(blok.text)
-					.replace('{c}', '©')
-					.replace('{year}', new Date().getFullYear())
-				el.removeAttribute('text')
+			if (typeof value === 'boolean') {
+				el.setAttribute(attr, value)
 			}
 
-			target.appendChild(el)
+			if (typeof value === 'string' && value) {
+				if (attr === 'style') attr = 'variant'
+				el.setAttribute(attr, value)
+			}
+
+			if (typeof value === 'object') {
+				if (Array.isArray(value) && value[0]?.component) {
+					renderBloks(value, el, attr)
+				} else {
+					el.setAttribute(attr, JSON.stringify(value))
+				}
+			}
 		})
-	}
 
-	const write = (html, path) => {
-		let out = `dist/${path}`
-		if (out.startsWith('dist/home')) out = out.replace('/home', '')
-
-		if (!fs.existsSync(out)) {
-			fs.mkdirSync(out, { recursive: true })
+		if (blok.component === 'TextRich') {
+			el.innerHTML = renderRichText(blok.text)
+				.replace('{c}', '©')
+				.replace('{year}', new Date().getFullYear())
+			el.removeAttribute('text')
 		}
 
-		const stream = fs.createWriteStream(out + '/index.html')
-		stream.once('open', () => {
-			var content = html
-			stream.end(content)
-		})
-	}
-
-	const url = [
-		`https://api.storyblok.com/v2/cdn/stories${slug}`,
-		`?token=${token}`,
-		'&version=published',
-	].join('')
-
-	fetch(url)
-		.then((res) => res.json())
-		.then((json) => {
-			const { story } = json
-			const body = story?.content?.body
-
-			if (body) {
-				renderBloks(body, document.body)
-				const storyMarkup = document.body.innerHTML
-					.replaceAll('\n', '')
-					.replaceAll('\t', '')
-				write(
-					template.replace('<!-- story -->', `<main>${storyMarkup}</main>`),
-					story.full_slug
-				)
-			}
-		})
+		target.appendChild(el)
+	})
 }
 
-getPages()
+function renderStory(story) {
+	document.body.innerHTML = ''
+	renderBloks(story.content.body, document.body)
+	const slug = story.full_slug === 'home' ? '' : story.full_slug + '/'
+	const html = template.replace('<!-- story -->', document.body.innerHTML)
+	write(html, slug)
+}
+
+const write = (html, path) => {
+	let out = `dist/${path}`
+
+	if (!fs.existsSync(out)) {
+		fs.mkdirSync(out, { recursive: true })
+	}
+
+	const stream = fs.createWriteStream(out + 'index.html')
+	stream.once('open', () => {
+		var content = html
+		stream.end(content)
+	})
+}
+
+buildSite()
