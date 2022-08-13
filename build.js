@@ -1,15 +1,14 @@
 import { apiPlugin, renderRichText, storyblokInit } from '@storyblok/js'
 import fs from 'fs'
 import { JSDOM } from 'jsdom'
-const { document } = new JSDOM().window
 
+const { document } = new JSDOM().window
 const { storyblokApi } = storyblokInit({
 	accessToken: process.env.storyblok,
 	use: [apiPlugin],
 })
 
 let template = ''
-
 fs.readFile('./index.html', 'utf8', (error, data) => {
 	if (error) {
 		console.error(error)
@@ -28,7 +27,7 @@ async function buildSite() {
 	})
 }
 
-const renderBloks = (array, target, slot) => {
+function renderBloks(array, target, slot) {
 	array.forEach((blok) => {
 		if (!blok.component) return
 
@@ -79,7 +78,7 @@ function renderStory(story) {
 	write(html, slug)
 }
 
-const write = (html, path) => {
+function write(html, path) {
 	let out = `dist/${path}`
 
 	if (!fs.existsSync(out)) {
