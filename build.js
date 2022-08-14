@@ -3,22 +3,24 @@ import fs from 'fs'
 import { JSDOM } from 'jsdom'
 
 const { document } = new JSDOM().window
-const { storyblokApi } = storyblokInit({
-	accessToken: process.env.storyblok,
-	use: [apiPlugin],
-})
 
-let template = ''
 fs.readFile('./index.html', 'utf8', (error, data) => {
 	if (error) {
 		console.error(error)
-	} else template = data
+	} else document.documentElement.innerHTML = data
+})
+
+const { storyblokApi } = storyblokInit({
+	accessToken: process.env.storyblok,
+	use: [apiPlugin],
 })
 
 async function buildSite() {
 	const { data } = await storyblokApi.get('cdn/stories', {
 		version: 'published',
 	})
+
+	global(data?.stories.filter((story) => story.slug === 'settings')[0])
 
 	data?.stories.forEach((story) => {
 		if (story.slug !== 'settings') {
@@ -70,12 +72,52 @@ function renderBloks(array, target, slot) {
 	})
 }
 
+function global(story) {
+	const { content } = story
+	document.head.innerHTML += `
+		<link rel="icon" type="image/x-icon" href="${content.favicon?.filename}" />
+		<title>${content.SEO.title}</title>
+		<meta name="title" content="${content.SEO.title}" />
+		<meta name="description" content="${content.SEO.description}" />
+		<meta property="og:title" content="${content.SEO.title}" />
+		<meta property="og:description" content="${content.SEO.description}" />
+		<meta property="og:image" content="${content.SEO_IMAGE?.filename}" />
+		<meta property="og:type" content="website" />
+		<meta property="twitter:title" content="${content.SEO.title}" />
+		<meta property="twitter:description" content="${content.SEO.description}" />
+		<meta property="twitter:image" content="${content.SEO_IMAGE?.filename}" />
+		<meta property="twitter:card" content="summary_large_image" />
+
+		<style>
+			:root {
+				--background: ${content.background};
+				--on-background: ${content.on_background};
+				--primary: ${content.primary};
+				--on-primary: ${content.on_primary};
+				--secondary: ${content.secondary};
+				--on-secondary: ${content.on_secondary};
+				--surface: ${content.surface};
+				--on-surface: ${content.on_surface};
+				--surface-border: ${content.surface_border};
+			}
+			${content.custom_css}
+		</style>
+	`
+	const nav = document.querySelector('nav')
+	renderBloks(content.drawer_button, nav)
+	nav.innerHTML += `<a href="/">${content.app_bar_title}</a>`
+	renderBloks(content.app_bar_desktop, nav)
+	renderBloks(content.app_bar, nav)
+	renderBloks(content.drawer, document.querySelector('dialog'))
+	renderBloks(content.footer, document.querySelector('footer'))
+}
+
 function renderStory(story) {
-	document.body.innerHTML = ''
-	renderBloks(story.content.body, document.body)
+	const main = document.querySelector('main')
+	renderBloks(story.content.body, main)
 	const slug = story.full_slug === 'home' ? '' : story.full_slug + '/'
-	const html = template.replace('<!-- story -->', document.body.innerHTML)
-	write(html, slug)
+	write(document.documentElement.innerHTML, slug)
+	main.innerHTML = ''
 }
 
 function write(html, path) {

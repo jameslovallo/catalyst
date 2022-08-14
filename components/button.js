@@ -19,7 +19,19 @@ export default {
 			const invert = '--background: transparent; --color: var(--button);'
 			switch (v) {
 				case 'icon':
-					return ``
+					return `
+						:host {
+							background: var(--app-bar);
+							border-radius: 24px;
+							color: var(--on-app-bar);
+							height: 48px;
+							width: 48px;
+						}
+						button {
+							padding: 0;
+						}
+						svg { height: 24px; width: 24px; }
+					`
 				case 'outlined':
 					return `
 						:host { 
@@ -50,12 +62,17 @@ export default {
 		},
 	},
 	template() {
+		const tag = this.link ? 'a' : 'button'
+		const icon = this.props.variant.value === 'icon'
 		return `
 			<span part="background"></span>
-			<a href="${this.link}">
+			<${tag}
+				${this.link ? ` href="${this.link}"` : ''}
+				${icon ? ` aria-label="${this.label}"` : ''}
+			>
 				${this.icon?.icon ? this.icon.icon : ''}
-				${this.label ? `<span>${this.label}</span>` : ''}
-			</a>
+				${this.label && !icon ? `<span>${this.label}</span>` : ''}
+			</${tag}>
 		`
 	},
 	styles() {
@@ -83,13 +100,15 @@ export default {
 			:host(:active) [part=background] {
 				opacity: var(--active-opacity);
 			}
-			[part=background], a {
+			[part=background], a, button {
 				grid-area: 1/-1;
 			}
-			a {
+			a, button {
 				${css('flex-direction', this.trailing_icon ? 'row-reverse' : undefined)}
 				${css('justify-content', this.stretch ? 'space-between' : 'center')}
 				align-items: center;
+				background: none;
+				border: none;
 				color: inherit;
 				cursor: pointer;
 				display: flex;

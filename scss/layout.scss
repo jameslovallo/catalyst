@@ -23,6 +23,29 @@ $breakpoints: (
 	'xl': '1333px',
 );
 
+nav {
+	align-items: center;
+	display: flex;
+	height: 56px;
+	padding-left: 4px;
+	padding-right: 8px;
+
+	@media (min-width: 768px) {
+		padding-left: 12px;
+		padding-right: 16px;
+		height: 64px;
+	}
+
+	> a[href='\/'] {
+		color: inherit;
+		font-size: 20px;
+		font-weight: 500;
+		margin-left: 20px;
+		margin-right: auto;
+		text-decoration: none;
+	}
+}
+
 main,
 article {
 	padding: var(--gap) var(--page-padding);
@@ -33,8 +56,8 @@ article,
 c-section,
 .grid {
 	display: grid;
-	grid-template-columns: repeat(12, 1fr);
 	gap: var(--gap);
+	grid-template-columns: repeat(12, 1fr);
 
 	> * {
 		grid-column: auto / span 12;
