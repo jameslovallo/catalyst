@@ -108,7 +108,7 @@ function global(story) {
 	const nav = document.querySelector('nav')
 	renderBloks(content.drawer_button, nav)
 	nav.innerHTML += `<a href="/">${content.app_bar_title}</a>`
-	renderBloks(content.app_bar_desktop, nav)
+	renderBloks(content.app_bar_desktop, nav, 'desktop')
 	renderBloks(content.app_bar, nav)
 	renderBloks(content.drawer, document.querySelector('c-drawer'))
 	renderBloks(content.footer, document.querySelector('footer'))
