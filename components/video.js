@@ -35,12 +35,12 @@ export default {
 		},
 		youtube() {
 			if (this.youtube_video_id) {
-				import('//unpkg.com/@justinribeiro/lite-youtube')
 				return `
 					<lite-youtube
 						videoid="${this.youtube_video_id}"
 						posterquality="${this.use_hd_poster}"
 					></lite-youtube>
+					<script type="module" src="//unpkg.com/@justinribeiro/lite-youtube"></script>
 				`
 			} else return false
 		},
