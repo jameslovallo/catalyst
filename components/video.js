@@ -52,6 +52,7 @@ export default {
 			:host {
 				${this.responsive}
 				${this.vertical_alignment}
+				aspect-ratio: 16/9;
 			}
 			video { display: block; width: 100%; }
 		`
