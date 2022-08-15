@@ -64,6 +64,10 @@ nav {
 	}
 }
 
+c-dialog:not([loaded]) {
+	display: none;
+}
+
 main,
 article {
 	padding: var(--gap) var(--page-padding);

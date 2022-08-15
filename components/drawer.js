@@ -16,17 +16,15 @@ export default {
 				this.parts.scrim.style.display = 'none'
 			}, 333)
 		},
-		setupDrawer() {
-			this.trigger = document.querySelector('nav > c-button:first-of-type')
-			this.trigger.addEventListener('click', () => {
-				const state = this.getAttribute('open')
-				state === 'false' ? this.openDrawer() : this.closeDrawer()
-			})
-			this.parts.scrim.on('click', () => this.closeDrawer())
-		},
 	},
 	ready() {
-		this.setupDrawer()
+		this.trigger = document.querySelector('nav > c-button:first-of-type')
+		this.trigger.addEventListener('click', () => {
+			const state = this.getAttribute('open')
+			state === 'false' ? this.openDrawer() : this.closeDrawer()
+		})
+		this.parts.scrim.on('click', () => this.closeDrawer())
+		this.setAttribute('loaded', '')
 	},
 	template() {
 		return `
