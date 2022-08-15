@@ -13,10 +13,12 @@ export default {
 	},
 	ready() {
 		this.innerHTML = `<style>${this.css}</style>` + this.html
-		const tag = document.createElement('script')
-		tag.type = 'module'
-		tag.innerHTML = this.javascript
-		this.appendChild(tag)
+		if (this.javascript) {
+			const tag = document.createElement('script')
+			tag.type = 'module'
+			tag.innerHTML = this.javascript
+			this.appendChild(tag)
+		}
 	},
 	template() {
 		return '<slot></slot>'
