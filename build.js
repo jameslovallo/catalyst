@@ -3,8 +3,9 @@ import fs from 'fs'
 import { JSDOM } from 'jsdom'
 
 const { document } = new JSDOM().window
+const templatePath = process.env.NETLIFY_DEV === 'true' ? './' : './dist/'
 
-fs.readFile('./dist/index.html', 'utf8', (error, data) => {
+fs.readFile(`${templatePath}index.html`, 'utf8', (error, data) => {
 	if (error) {
 		console.error(error)
 	} else document.documentElement.innerHTML = data
@@ -109,7 +110,7 @@ function global(story) {
 	nav.innerHTML += `<a href="/">${content.app_bar_title}</a>`
 	renderBloks(content.app_bar_desktop, nav)
 	renderBloks(content.app_bar, nav)
-	renderBloks(content.drawer, document.querySelector('dialog'))
+	renderBloks(content.drawer, document.querySelector('c-drawer'))
 	renderBloks(content.footer, document.querySelector('footer'))
 }
 

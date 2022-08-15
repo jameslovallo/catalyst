@@ -12,14 +12,21 @@ export default {
 		text: (v) => (v ? v : ''),
 	},
 	template() {
+		const avatar = () => {
+			if (this.icon.icon || this.avatar.filename) {
+				return `
+					<span part="avatar" aria-hidden="true">
+						${this.icon.icon || ''}
+						${this.avatar.filename || ''}
+					</span>
+				`
+			} else return ''
+		}
 		return `
 			<span part="background"></span>
 			<a href="${this.link}">
-				<span part="avatar">
-					${this.icon.icon || ''}
-					${this.avatar.filename || ''}
-				</span>
-				<span>
+				${avatar()}
+				<span part="content">
 					<span part="text">${this.text}</span><br>
 					<span part="secondary-text">${this.secondary_text || ''}</span>
 				</span>
@@ -28,9 +35,7 @@ export default {
 	},
 	styles() {
 		return `
-			:host {
-				display: grid;
-			}
+			:host { display: grid }
 			:host(:not(:last-of-type)) {
 				border-bottom: var(--separator) solid var(--surface-border);
 			}
@@ -55,7 +60,7 @@ export default {
 				text-decoration: none;
 				z-index: 2;
 			}
-			[part="avatar"] {
+			[part=avatar] {
 				background: var(--list);
 				border-radius: 50%;
 				display: grid;
@@ -64,11 +69,12 @@ export default {
 				place-items: center;
 				width: 40px;
 			}
+			[part=content] { display: block; }
 			[part="text"] {
 				letter-spacing: .15px;
 				line-height: 24px;
 			}
-			[part="secondary-text"] {
+			[part=secondary-text] {
 				font-size: 14px;
 				letter-spacing: .25px;
 				line-height: normal;
