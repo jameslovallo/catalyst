@@ -1,13 +1,13 @@
-import css from './utils/css-prop'
-
 export default {
 	name: 'c-spacer',
 	shadow: true,
-	props: { height: (v) => css('height', v + 'px') },
+	props: { height: String },
+	template() {
+		return `<div style="height: ${this.height}"></div>`
+	},
 	styles() {
 		return `
-			:host { 
-				${this.height}
+			:host {
 				display: block;
 			}
 		`

@@ -53,6 +53,7 @@ article {
 
 main,
 article,
+c-group[subgrid='true'],
 c-section,
 .grid {
 	display: grid;
@@ -71,6 +72,13 @@ c-section,
 
 	> c-spacer {
 		margin: calc(-1 * var(--gap)) 0;
+	}
+}
+
+footer {
+	c-section[variant*='full-width'] {
+		margin-left: 0;
+		margin-right: 0;
 	}
 }
 

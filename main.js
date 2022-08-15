@@ -1,9 +1,9 @@
-import catalyst from '@snappywc/catalyst'
+import composer from '@snappywc/composer'
 const components = import.meta.glob('./components/*.js')
 import './scss/index.scss'
 
 for (const path in components) {
 	components[path]().then((component) => {
-		catalyst(component.default)
+		composer(component.default)
 	})
 }

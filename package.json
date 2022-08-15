@@ -10,7 +10,7 @@
 		"preview": "vite preview"
 	},
 	"devDependencies": {
-		"@snappywc/catalyst": "^1.0.3",
+		"@snappywc/composer": "^1.0.4",
 		"@storyblok/js": "^1.7.1",
 		"jsdom": "^20.0.0",
 		"sass": "^1.54.4",

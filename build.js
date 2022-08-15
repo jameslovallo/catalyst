@@ -87,7 +87,8 @@ function global(story) {
 		<meta property="twitter:description" content="${content.SEO.description}" />
 		<meta property="twitter:image" content="${content.SEO_IMAGE?.filename}" />
 		<meta property="twitter:card" content="summary_large_image" />
-
+	`
+	document.body.innerHTML += `
 		<style>
 			:root {
 				--background: ${content.background};
