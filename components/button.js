@@ -5,7 +5,7 @@ export default {
 	name: 'c-button',
 	shadow: true,
 	props: {
-		color: (v) => (v ? v : ''),
+		color: (v) => (v ? v : null),
 		icon: JSON.parse,
 		label: String,
 		link: link,
