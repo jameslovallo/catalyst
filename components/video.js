@@ -1,5 +1,6 @@
 import css from './utils/css-prop'
 import responsive from './utils/responsive'
+import '@justinribeiro/lite-youtube'
 
 export default {
 	name: 'c-video',
