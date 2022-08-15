@@ -1,5 +1,6 @@
 import css from './utils/css-prop'
 import responsive from './utils/responsive'
+import '@snappywc/tabs'
 
 export default {
 	name: 'c-tabs',
@@ -14,7 +15,6 @@ export default {
 		vertical_alignment: (v) => css('align-self', v),
 	},
 	template() {
-		import('//unpkg.com/@snappywc/tabs')
 		const tabs = [...this.children]
 			.filter((tab) => tab.tagName === 'C-TAB')
 			.map((tab, i) => {
