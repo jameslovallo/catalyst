@@ -4,7 +4,7 @@ import { JSDOM } from 'jsdom'
 
 const { document } = new JSDOM().window
 
-fs.readFile('./index.html', 'utf8', (error, data) => {
+fs.readFile('./dist/index.html', 'utf8', (error, data) => {
 	if (error) {
 		console.error(error)
 	} else document.documentElement.innerHTML = data
