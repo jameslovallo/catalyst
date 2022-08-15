@@ -10,13 +10,12 @@
 		"preview": "vite preview"
 	},
 	"devDependencies": {
+		"@justinribeiro/lite-youtube": "^1.4.0",
 		"@snappywc/composer": "^1.0.4",
 		"@storyblok/js": "^1.7.1",
+		"@snappywc/tabs": "^1.0.4",
 		"jsdom": "^20.0.0",
 		"sass": "^1.54.4",
 		"vite": "^3.0.5"
-	},
-	"dependencies": {
-		"@snappywc/tabs": "^1.0.4"
 	}
 }

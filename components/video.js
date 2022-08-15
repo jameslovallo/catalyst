@@ -40,9 +40,6 @@ export default {
 						videoid="${this.youtube_video_id}"
 						posterquality="${this.use_hd_poster}"
 					></lite-youtube>
-					<script type="module">
-						import "//unpkg.com/@justinribeiro/lite-youtube"
-					></script>
 				`
 			} else return false
 		},
