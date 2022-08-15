@@ -3,6 +3,7 @@ import fs from 'fs'
 import { JSDOM } from 'jsdom'
 
 const { document } = new JSDOM().window
+document.documentElement.setAttribute('lang', 'en')
 const templatePath = process.env.NETLIFY_DEV === 'true' ? './' : './dist/'
 
 fs.readFile(`${templatePath}index.html`, 'utf8', (error, data) => {
@@ -118,7 +119,7 @@ function renderStory(story) {
 	const main = document.querySelector('main')
 	renderBloks(story.content.body, main)
 	const slug = story.full_slug === 'home' ? '' : story.full_slug + '/'
-	write(document.documentElement.innerHTML, slug)
+	write(document.documentElement.outerHTML, slug)
 	main.innerHTML = ''
 }
 
