@@ -2,11 +2,13 @@ import css from './utils/css-prop'
 import responsive from './utils/responsive'
 
 export default {
-	name: 'c-group',
+	component: 'c-group',
 	shadow: true,
-	props: {
-		responsive: responsive,
-		vertical_alignment: (v) => css('align-self', v),
+	props() {
+		return {
+			responsive: responsive,
+			vertical_alignment: (v) => css('align-self', v),
+		}
 	},
 	template() {
 		return `<slot name="content"></slot>`

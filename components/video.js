@@ -1,26 +1,27 @@
+import '@justinribeiro/lite-youtube'
 import css from './utils/css-prop'
 import responsive from './utils/responsive'
-import '@justinribeiro/lite-youtube'
 
 export default {
-	name: 'c-video',
+	component: 'c-video',
 	shadow: true,
-	props: {
-		autoplay: String,
-		controls: (v) => (v === 'true' ? 'controls' : ''),
-		loop: String,
-		mute: String,
-		plays_inline: String,
-		responsive: responsive,
-		use_hd_poster: (v) => (v === 'true' ? 'maxresdefault' : 'hqdefault'),
-		vertical_alignment: (v) => css('align-self', v),
-		video_files: JSON.parse,
-		video_poster: JSON.parse,
-		youtube_video_id: (v) => v || undefined,
+	props() {
+		return {
+			autoplay: String,
+			controls: (v) => (v === 'true' ? 'controls' : ''),
+			loop: String,
+			mute: String,
+			plays_inline: String,
+			responsive: responsive,
+			use_hd_poster: (v) => (v === 'true' ? 'maxresdefault' : 'hqdefault'),
+			vertical_alignment: (v) => css('align-self', v),
+			video_files: JSON.parse,
+			video_poster: JSON.parse,
+			youtube_video_id: (v) => v || undefined,
+		}
 	},
-	methods: {
-		video() {
-			return `
+	video() {
+		return `
 				<video
 					autoplay="${this.autoplay}"
 					${this.controls}
@@ -33,17 +34,16 @@ export default {
 					${this.video_files.map((src) => `<source src="${src.filename}"/>`).join()}
 				</video>
 			`
-		},
-		youtube() {
-			if (this.youtube_video_id) {
-				return `
+	},
+	youtube() {
+		if (this.youtube_video_id) {
+			return `
 					<lite-youtube
 						videoid="${this.youtube_video_id}"
 						posterquality="${this.use_hd_poster}"
 					></lite-youtube>
 				`
-			} else return false
-		},
+		} else return false
 	},
 	template() {
 		return this.youtube() || this.video()

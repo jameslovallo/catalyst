@@ -4,29 +4,38 @@ import image from './utils/image'
 import responsive from './utils/responsive'
 
 export default {
-	name: 'c-image',
+	component: 'c-image',
 	shadow: true,
-	props: {
-		aspect_ratio: String,
-		brightness: String,
-		contrast: String,
-		fit: String,
-		grayscale: String,
-		image: String,
-		responsive: responsive,
-		saturation: String,
-		vertical_alignment: (v) => css('align-self', v),
+	props() {
+		return {
+			aspect_ratio: String,
+			brightness: String,
+			contrast: String,
+			fit: String,
+			grayscale: String,
+			image: JSON.parse,
+			responsive: responsive,
+			saturation: String,
+			vertical_alignment: (v) => css('align-self', v),
+		}
+	},
+	sbImg() {
+		return {
+			aspect_ratio: this.aspect_ratio,
+			fit: this.fit,
+			image: this.image,
+		}
 	},
 	ready() {
 		addEventListener(
 			'resize',
 			debounce(() => {
-				this.parts.image.innerHTML = image(this.props, this.clientWidth)
+				this.parts.image.innerHTML = image(this.sbImg(), this.clientWidth)
 			}, 1000)
 		)
 	},
 	template() {
-		return `<div part="image">${image(this.props, this.clientWidth)}</div>`
+		return `<div part="image">${image(this.sbImg(), this.clientWidth)}</div>`
 	},
 	styles() {
 		return `

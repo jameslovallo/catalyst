@@ -2,14 +2,16 @@ import css from './utils/css-prop'
 import responsive from './utils/responsive'
 
 export default {
-	name: 'c-code',
+	component: 'c-code',
 	shadow: true,
-	props: {
-		css: String,
-		html: String,
-		javascript: String,
-		responsive: responsive,
-		vertical_alignment: (v) => css('align-self', v),
+	props() {
+		return {
+			css: String,
+			html: String,
+			javascript: String,
+			responsive: responsive,
+			vertical_alignment: (v) => css('align-self', v),
+		}
 	},
 	ready() {
 		this.innerHTML = `<style>${this.css}</style>` + this.html

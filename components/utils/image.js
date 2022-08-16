@@ -1,5 +1,5 @@
 export default (p, w) => {
-	const i = JSON.parse(p.image.value)
+	const i = p.image
 	const { filename } = i
 	const dimensions = i.filename.split('/')[5]
 	const contain = p.fit === 'contain' ? '/fit-in' : ''

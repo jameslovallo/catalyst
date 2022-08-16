@@ -1,15 +1,17 @@
 import link from './utils/link'
 
 export default {
-	name: 'c-listitem',
+	component: 'c-listitem',
 	shadow: true,
-	props: {
-		avatar: JSON.parse,
-		icon: JSON.parse,
-		link: link,
-		role: () => 'listitem',
-		secondary_text: (v) => (v ? v : ''),
-		text: (v) => (v ? v : ''),
+	props() {
+		return {
+			avatar: JSON.parse,
+			icon: JSON.parse,
+			link: link,
+			role: () => 'listitem',
+			secondary_text: (v) => (v ? v : ''),
+			text: (v) => (v ? v : ''),
+		}
 	},
 	template() {
 		const avatar = () => {

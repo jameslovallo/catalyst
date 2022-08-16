@@ -1,31 +1,29 @@
 import { lock, unlock } from 'tua-body-scroll-lock'
 
 export default {
-	name: 'c-drawer',
+	component: 'c-drawer',
 	shadow: true,
-	methods: {
-		openDrawer() {
-			lock(this.parts.drawer)
-			this.parts.drawer.style.display = 'flex'
-			this.parts.overlay.style.display = 'block'
-			setTimeout(() => {
-				this.setAttribute('open', true)
-			})
-		},
-		closeDrawer() {
-			unlock(this.parts.drawer)
-			this.setAttribute('open', false)
-			setTimeout(() => {
-				this.parts.drawer.style.display = 'none'
-				this.parts.overlay.style.display = 'none'
-			}, 333)
-		},
+	open_drawer() {
+		lock(this.parts.drawer)
+		this.parts.drawer.style.display = 'flex'
+		this.parts.overlay.style.display = 'block'
+		setTimeout(() => {
+			this.setAttribute('open', true)
+		})
+	},
+	close_drawer() {
+		unlock(this.parts.drawer)
+		this.setAttribute('open', false)
+		setTimeout(() => {
+			this.parts.drawer.style.display = 'none'
+			this.parts.overlay.style.display = 'none'
+		}, 333)
 	},
 	ready() {
 		this.trigger = document.querySelector('nav > c-button:first-of-type')
 		this.trigger.addEventListener('click', () => {
 			const state = this.getAttribute('open')
-			state === 'false' ? this.openDrawer() : this.closeDrawer()
+			state === 'false' ? this.open_drawer() : this.close_drawer()
 		})
 		this.parts.overlay.on('click', () => this.closeDrawer())
 		this.setAttribute('loaded', '')

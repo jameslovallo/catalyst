@@ -4,24 +4,24 @@ import css from './utils/css-prop'
 import responsive from './utils/responsive'
 
 export default {
-	name: 'c-dialog',
+	component: 'c-dialog',
 	shadow: true,
-	props: {
-		heading: String,
-		trigger_title: String,
-		close_button_text: String,
-		responsive: responsive,
-		vertical_alignment: (v) => css('align-self', v),
+	props() {
+		return {
+			heading: String,
+			trigger_title: String,
+			close_button_text: String,
+			responsive: responsive,
+			vertical_alignment: (v) => css('align-self', v),
+		}
 	},
-	methods: {
-		show() {
-			this.dialog.show()
-			lock(this.parts.content)
-		},
-		hide() {
-			this.dialog.hide()
-			unlock(this.parts.content)
-		},
+	show() {
+		this.dialog.show()
+		lock(this.parts.content)
+	},
+	hide() {
+		this.dialog.hide()
+		unlock(this.parts.content)
 	},
 	ready() {
 		this.dialog = new A11yDialog(this.parts.container)

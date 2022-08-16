@@ -3,16 +3,18 @@ import css from './utils/css-prop'
 import responsive from './utils/responsive'
 
 export default {
-	name: 'c-tabs',
+	component: 'c-tabs',
 	shadow: true,
-	props: {
-		desktop_format: String,
-		heading_level: String,
-		mobile_format: String,
-		responsive: responsive,
-		tablet_format: String,
-		variant: String,
-		vertical_alignment: (v) => css('align-self', v),
+	props() {
+		return {
+			desktop_format: String,
+			heading_level: String,
+			mobile_format: String,
+			responsive: responsive,
+			tablet_format: String,
+			variant: String,
+			vertical_alignment: (v) => css('align-self', v),
+		}
 	},
 	template() {
 		const tabs = [...this.children]

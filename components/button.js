@@ -2,24 +2,25 @@ import css from './utils/css-prop'
 import link from './utils/link'
 
 export default {
-	name: 'c-button',
+	component: 'c-button',
 	shadow: true,
-	props: {
-		color: (v) => (v ? v : null),
-		icon: JSON.parse,
-		label: String,
-		link: link,
-		rounded: (v) => css('border-radius', JSON.parse(v) ? '18px' : '4px'),
-		stretch: JSON.parse,
-		trailing_icon: JSON.parse,
-		variant: 'variant',
+	props() {
+		return {
+			color: (v) => (v ? v : null),
+			icon: (v) => (v ? JSON.parse(v) : false),
+			label: String,
+			link: link,
+			rounded: (v) => css('border-radius', v === 'true' ? '18px' : '4px'),
+			stretch: (v) => v === 'true',
+			trailing_icon: (v) => v === 'true',
+			variant: this.set_variant,
+		}
 	},
-	methods: {
-		variant(v) {
-			const invert = '--background: transparent; --color: var(--button);'
-			switch (v) {
-				case 'icon':
-					return `
+	set_variant(v) {
+		const invert = '--background: transparent; --color: var(--button);'
+		switch (v) {
+			case 'icon':
+				return `
 						:host {
 							background: var(--app-bar);
 							border-radius: 24px;
@@ -32,23 +33,23 @@ export default {
 						}
 						svg { height: 24px; width: 24px; }
 					`
-				case 'outlined':
-					return `
+			case 'outlined':
+				return `
 						:host { 
 							${invert}
 							box-shadow: 0 0 0 1px var(--button);
 							margin: 1px; 
 						}
 					`
-				case 'raised':
-					return `
+			case 'raised':
+				return `
 						:host { 
 							box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%),
 								0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
 						}
 					`
-				case 'subtle':
-					return `
+			case 'subtle':
+				return `
 						:host { color: var(--button); background: transparent; }
 						[part=background] {
 							opacity: 0.1;
@@ -56,22 +57,21 @@ export default {
 							--active-opacity: 0.3;
 						}
 					`
-				case 'text':
-					return `:host { ${invert} --padding: 0 8px; }`
-			}
-		},
+			case 'text':
+				return `:host { ${invert} --padding: 0 8px; }`
+		}
 	},
 	template() {
 		const tag = this.link ? 'a' : 'button'
-		const icon = this.props.variant.value === 'icon'
+		const icon_only = this.getAttribute('variant') === 'icon'
 		return `
 			<span part="background"></span>
 			<${tag}
 				${this.link ? ` href="${this.link}"` : ''}
-				${icon ? ` aria-label="${this.label}"` : ''}
+				${icon_only ? ` aria-label="${this.label}"` : ''}
 			>
 				${this.icon?.icon ? this.icon.icon : ''}
-				${this.label && !icon ? `<span>${this.label}</span>` : ''}
+				${this.label && !icon_only ? `<span>${this.label}</span>` : ''}
 			</${tag}>
 		`
 	},

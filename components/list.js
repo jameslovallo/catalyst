@@ -2,14 +2,16 @@ import css from './utils/css-prop'
 import responsive from './utils/responsive'
 
 export default {
-	name: 'c-list',
+	component: 'c-list',
 	shadow: true,
-	props: {
-		color: (v) => (v ? v : 'primary'),
-		responsive: responsive,
-		role: () => 'list',
-		show_dividers: (v) => css('--separator', JSON.parse(v) ? '1px' : '0'),
-		vertical_alignment: (v) => css('align-self', v),
+	props() {
+		return {
+			color: (v) => (v ? v : 'primary'),
+			responsive: responsive,
+			role: () => 'list',
+			show_dividers: (v) => css('--separator', JSON.parse(v) ? '1px' : '0'),
+			vertical_alignment: (v) => css('align-self', v),
+		}
 	},
 	template() {
 		return `<slot name="content"></slot>`

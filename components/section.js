@@ -1,11 +1,13 @@
 import css from './utils/css-prop'
 
 export default {
-	name: 'c-section',
+	component: 'c-section',
 	shadow: true,
-	props: {
-		color: String,
-		vertical_alignment: (v) => css('align-self', v),
+	props() {
+		return {
+			color: String,
+			vertical_alignment: (v) => css('align-self', v),
+		}
 	},
 	template() {
 		return `<span part="top"></span><slot name="content"></slot>`
