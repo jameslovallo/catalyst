@@ -1,19 +1,23 @@
+import { lock, unlock } from 'tua-body-scroll-lock'
+
 export default {
 	name: 'c-drawer',
 	shadow: true,
 	methods: {
 		openDrawer() {
+			lock(this.parts.drawer)
 			this.parts.drawer.style.display = 'flex'
-			this.parts.scrim.style.display = 'block'
+			this.parts.overlay.style.display = 'block'
 			setTimeout(() => {
 				this.setAttribute('open', true)
 			})
 		},
 		closeDrawer() {
+			unlock(this.parts.drawer)
 			this.setAttribute('open', false)
 			setTimeout(() => {
 				this.parts.drawer.style.display = 'none'
-				this.parts.scrim.style.display = 'none'
+				this.parts.overlay.style.display = 'none'
 			}, 333)
 		},
 	},
@@ -23,12 +27,12 @@ export default {
 			const state = this.getAttribute('open')
 			state === 'false' ? this.openDrawer() : this.closeDrawer()
 		})
-		this.parts.scrim.on('click', () => this.closeDrawer())
+		this.parts.overlay.on('click', () => this.closeDrawer())
 		this.setAttribute('loaded', '')
 	},
 	template() {
 		return `
-			<div part="scrim"></div>
+			<div part="overlay"></div>
 			<div part="drawer"><slot></slot></div>
 		`
 	},
@@ -58,7 +62,7 @@ export default {
 			:host([open=true]) [part=drawer] {
 				transform: translate3D(0,0,0)
 			}
-			[part=scrim] {
+			[part=overlay] {
 				background: black;
 				bottom: 0;
 				cursor: pointer;
@@ -72,7 +76,7 @@ export default {
 				z-index: 99998;
 			}
 
-			:host([open=true]) [part=scrim] {
+			:host([open=true]) [part=overlay] {
 				opacity: .33;
 			}
 		`
