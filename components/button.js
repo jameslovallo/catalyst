@@ -6,13 +6,13 @@ export default {
 	shadow: true,
 	props() {
 		return {
-			color: (v) => (v ? v : null),
-			icon: (v) => (v ? JSON.parse(v) : false),
+			color: String,
+			icon: JSON.parse,
 			label: String,
 			link: link,
 			rounded: (v) => css('border-radius', v === 'true' ? '18px' : '4px'),
-			stretch: (v) => v === 'true',
-			trailing_icon: (v) => v === 'true',
+			stretch: JSON.parse,
+			trailing_icon: JSON.parse,
 			variant: this.set_variant,
 		}
 	},
