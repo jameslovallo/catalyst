@@ -75,15 +75,19 @@ export default {
 			}
 			
 			[part=container], [part=overlay] {
-				display: flex;
 				align-items: center;
-				justify-content: center;
-				position: fixed;
-				top: 0;
-				left: 0;
 				bottom: 0;
+				display: flex;
+				justify-content: center;
+				left: 0;
+				position: fixed;
 				right: 0;
-				background: rgba(0,0,0,0.33);
+				top: 0;
+			}
+
+			[part=overlay] {
+				background: black;
+				opacity: .33;
 			}
 			
 			[part=content] {
@@ -111,14 +115,13 @@ export default {
 
 			[part=content] h2 {
 				font-size: 20px;
+				line-height: 2;
 				margin: 0;
 				padding: 16px 20px;
-				line-height: 2;
 			}
 			
 			[name=content] {
 				display: block;
-				padding: 1rem 1rem 0;
 				flex-grow: 1;
 				overflow-y: auto;
 				padding: 0 20px 24px;
