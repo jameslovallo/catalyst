@@ -36,13 +36,13 @@ nav {
 		color: inherit;
 		font-size: 20px;
 		font-weight: 500;
-		margin-left: 20px;
 		margin-right: auto;
 		text-decoration: none;
 	}
 
 	> c-button:first-of-type {
 		display: grid;
+		margin-right: 20px;
 	}
 
 	[slot='desktop'] {
