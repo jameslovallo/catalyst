@@ -1,6 +1,6 @@
+import '@snappywc/tabs'
 import css from './utils/css-prop'
 import responsive from './utils/responsive'
-import '@snappywc/tabs'
 
 export default {
 	name: 'c-tabs',

@@ -65,15 +65,10 @@ export default {
 				${this.responsive}
 				${this.vertical_alignment}
 			}
-
-			[part=container] {
-				z-index: 99999;
-			}
-
+			[part=container] { z-index: 99999; }
 			[part=container][aria-hidden="true"] {
 				display: none;
 			}
-			
 			[part=container], [part=overlay] {
 				align-items: center;
 				bottom: 0;
@@ -84,12 +79,11 @@ export default {
 				right: 0;
 				top: 0;
 			}
-
 			[part=overlay] {
 				background: black;
 				opacity: .33;
 			}
-			
+			[name=trigger], [part=overlay] { cursor: pointer }
 			[part=content] {
 				animation: 0.25s ease 0s 1 normal none running dialog;
 				background: var(--surface);
@@ -112,21 +106,18 @@ export default {
 				width: 90vw;
 				z-index: 99999;
 			}
-
 			[part=content] h2 {
 				font-size: 20px;
 				line-height: 2;
 				margin: 0;
 				padding: 16px 20px;
 			}
-			
 			[name=content] {
 				display: block;
 				flex-grow: 1;
 				overflow-y: auto;
 				padding: 0 20px 24px;
 			}
-
 			[part=actions] {
 				display: flex;
 				justify-content: flex-end;
