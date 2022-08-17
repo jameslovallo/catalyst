@@ -8,8 +8,8 @@ export default (p, w) => {
 	let [width, height] = dimensions.split('x')
 
 	let [hor, vert] = [0, 0]
-	if (p.aspect_ratio.value?.match(/[0-9]+\/[0-9]+/)) {
-		;[hor, vert] = p.aspect_ratio.value.split('/')
+	if (p.aspect_ratio.match(/[0-9]+\/[0-9]+/)) {
+		;[hor, vert] = p.aspect_ratio.split('/')
 	}
 
 	const src = (elWidth) => {
