@@ -1,0 +1,9 @@
+[dev]
+	targetPort =  5173
+
+[dev.https]
+certFile = "netlify/certificate.crt"
+keyFile = "netlify/privateKey.key"
+
+[build]
+  ignore = "git log -1 --pretty=%B | grep dependabot"

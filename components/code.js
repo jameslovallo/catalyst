@@ -30,6 +30,7 @@ export default {
 			:host {
 				${this.responsive}
 				${this.vertical_alignment}
+				display: block;
 			}
 		`
 	},

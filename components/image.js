@@ -20,10 +20,12 @@ export default {
 		}
 	},
 	sbImg() {
-		return {
-			aspect_ratio: this.aspect_ratio,
-			fit: this.fit,
-			image: this.image,
+		if (image) {
+			return {
+				aspect_ratio: this.aspect_ratio,
+				fit: this.fit,
+				image: this.image,
+			}
 		}
 	},
 	ready() {

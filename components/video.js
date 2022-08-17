@@ -28,10 +28,10 @@ export default {
 					loop="${this.loop}"
 					muted="${this.mute}"
 					playsinline="${this.plays_inline}"
-					poster="${this.video_poster.filename + '/m/'}"
+					poster="${this.video_poster?.filename + '/m/'}"
 					preload="auto"
 				>
-					${this.video_files.map((src) => `<source src="${src.filename}"/>`).join()}
+					${this.video_files?.map((src) => `<source src="${src?.filename}"/>`).join()}
 				</video>
 			`
 	},

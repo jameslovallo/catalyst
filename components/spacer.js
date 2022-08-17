@@ -5,9 +5,6 @@ export default {
 		return { height: String }
 	},
 	template() {
-		return `<div style="height: ${this.height}"></div>`
-	},
-	styles() {
-		return `:host { display: block }`
+		return `<div style="height: ${this.height}px"></div>`
 	},
 }
