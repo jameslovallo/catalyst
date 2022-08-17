@@ -1,0 +1,115 @@
+fieldset {
+	padding: 8px 0 0;
+	margin: 0;
+	border: none;
+	font-family: system-ui;
+
+	legend {
+		padding: 0;
+	}
+
+	label {
+		position: relative;
+		display: flex;
+		align-items: center;
+		line-height: 1;
+
+		[type='checkbox'],
+		[type='radio'] {
+			appearance: none;
+			position: relative;
+			margin: 0;
+			height: 40px;
+			width: 40px;
+			display: grid;
+			place-content: center;
+			cursor: pointer;
+			border-radius: 50%;
+			margin-right: 8px;
+			color: inherit;
+
+			&:before {
+				content: '';
+				height: 40px;
+				width: 40px;
+				border-radius: 50%;
+				position: absolute;
+				background: var(--field);
+				opacity: 0;
+			}
+
+			&:active:before,
+			&:focus-visible:before {
+				opacity: 0.1;
+			}
+
+			&:after {
+				content: '';
+				box-sizing: content-box;
+				height: 14px;
+				width: 14px;
+				border: 2px solid currentcolor;
+				border-radius: 2px;
+				opacity: 0.54;
+				transition: none;
+			}
+
+			&:checked:after {
+				background: var(--field);
+				border-color: var(--field);
+				opacity: 1;
+			}
+
+			& + svg {
+				display: block;
+				position: absolute;
+				left: 13px;
+				height: 14px;
+				width: 14px;
+				pointer-events: none;
+
+				& > path {
+					transition: stroke-dashoffset 180ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+					fill: none;
+					stroke-width: 3.12px;
+					stroke-dashoffset: 29.7833;
+					stroke-dasharray: 29.7833;
+				}
+			}
+
+			&:checked + svg > path {
+				stroke: var(--on-field);
+				stroke-dashoffset: 0;
+				opacity: 1;
+			}
+		}
+
+		[type='radio'] {
+			&:after {
+				border-radius: 50%;
+			}
+
+			&:checked:after {
+				background: transparent;
+			}
+
+			+ i {
+				position: absolute;
+				fill: var(--field);
+				background: var(--field);
+				border-radius: 50%;
+				height: 10px;
+				width: 10px;
+				left: 15px;
+				transform: scale(0);
+				transform-origin: center;
+				transition: 0.25s;
+				will-change: transform;
+			}
+
+			&:checked + i {
+				transform: scale(1);
+			}
+		}
+	}
+}
