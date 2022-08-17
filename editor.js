@@ -5,23 +5,21 @@ window.loaded = false
 window.story = {}
 
 // bridge
-if (!window.loaded) {
-	const bridgeTag = document.createElement('script')
-	bridgeTag.src = 'https://app.storyblok.com/f/storyblok-v2-latest.js'
-	document.body.appendChild(bridgeTag)
-	bridgeTag.addEventListener('load', () => {
-		const bridge = new StoryblokBridge({
-			preventClicks: true,
-		})
-		bridge.on(['input', 'change'], (payload) => {
-			if (payload.action === 'input') window.story = payload.story
-			if (payload.action === 'change') {
-				if (window.story.name) localStorage.setItem(slug, JSON.stringify(window.story))
-				location.reload()
-			}
-		})
+const bridgeTag = document.createElement('script')
+bridgeTag.src = 'https://app.storyblok.com/f/storyblok-v2-latest.js'
+document.body.appendChild(bridgeTag)
+bridgeTag.addEventListener('load', () => {
+	const bridge = new StoryblokBridge({
+		preventClicks: true,
 	})
-}
+	bridge.on(['input', 'change'], (payload) => {
+		if (payload.action === 'input') window.story = payload.story
+		if (payload.action === 'change') {
+			if (window.story.name) localStorage.setItem(slug, JSON.stringify(window.story))
+			location.reload()
+		}
+	})
+})
 
 function renderBloks(array, target, slot) {
 	array.forEach((blok) => {
@@ -36,7 +34,9 @@ function renderBloks(array, target, slot) {
 		el.dataset.blokUid = blok._uid
 		el.classList.add('storyblok__outline')
 
-		const attrs = Object.keys(blok).filter((key) => !['component', '_uid'].includes(key))
+		const attrs = Object.keys(blok).filter(
+			(key) => !['component', '_uid', '_editable'].includes(key)
+		)
 
 		attrs.forEach((attr) => {
 			const value = blok[attr]
@@ -132,7 +132,13 @@ function getStory() {
 				renderBloks(json.story.content.body, main)
 			}
 
-			// load component JS
+			document.querySelectorAll('nav, c-drawer').forEach((el) => {
+				el.addEventListener('click', (e) => {
+					e.preventDefault()
+					console.log(el)
+				})
+			})
+
 			import('./main')
 		})
 }
