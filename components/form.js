@@ -25,8 +25,14 @@ export default {
 				method="POST"
 				style="${css}"
 			>
+				<input type="submit" part="submit" style="display: none">
 				${this.innerHTML}
 			</form>
 		`
+	},
+	ready() {
+		this.querySelector('c-button').addEventListener('click', () => {
+			this.parts.submit.click()
+		})
 	},
 }
