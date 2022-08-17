@@ -12,30 +12,30 @@ export default {
 			responsive: responsive,
 		}
 	},
-	field_type(type, label, options, required) {
-		const tag = type === 'textarea' ? 'textarea' : 'input'
-		if (['text', 'tel', 'email', 'textarea'].includes(type)) {
+	field_type() {
+		const tag = this.type === 'textarea' ? 'textarea' : 'input'
+		if (['text', 'tel', 'email', 'textarea'].includes(this.type)) {
 			return `
-				<div class="material-input material-input--${type}">
+				<div class="material-input material-input--${this.type}">
 					<${tag}
-						name="${label}"
-						type="${type}"
+						name="${this.label}"
+						type="${this.type}"
 						placeholder=" "
-						required="${required}"
+						required="${this.required}"
 					>${tag === 'textarea' ? '</textarea>' : ''}
 					<div class="material-input-outline">
 						<label>
-							<span>${label}</span>
+							<span>${this.label}</span>
 						</label>
 					</div>
 				</div>
 			`
-		} else if (type === 'select') {
+		} else if (this.type === 'select') {
 			return `
 				<div class="material-input">
-					<select name="${label}" required="${required}">
+					<select name="${this.label}" required="${this.required}">
 						<option selected disabled></option>
-						${options
+						${this.options
 							.split('\n')
 							.map((option) => {
 								return `<option>${option}</option>`
@@ -44,13 +44,13 @@ export default {
 					</select>
 					<div class="material-input-outline">
 						<label>
-							<span>${label}</span>
+							<span>${this.label}</span>
 						</label>
 					</div>
 					<i></i>
 				</div>
 			`
-		} else if (['checkbox', 'radio'].includes(type)) {
+		} else if (['checkbox', 'radio'].includes(this.type)) {
 			const check = `
 				<svg viewBox="0 0 24 24">
 					<path d="M1.73,12.91 8.1,19.28 22.79,4.59" />
@@ -58,15 +58,15 @@ export default {
 			`
 			return `
 				<fieldset>
-					<legend>${label}</legend>
-					${options
+					<legend>${this.label}</legend>
+					${this.options
 						.split('\n')
 						.map((option) => {
 							return `
 								<label>
-									<input type="${type}" name="${label}" />
-									${type === 'radio' ? `<i></i>` : ''}
-									${type === 'checkbox' ? check : ''}
+									<input type="${this.type}" name="${this.label}" />
+									${this.type === 'radio' ? `<i></i>` : ''}
+									${this.type === 'checkbox' ? check : ''}
 									${option}
 								</label>
 							`
@@ -102,7 +102,7 @@ export default {
 		}
 	},
 	template() {
-		this.innerHTML = this.field_type(this.type, this.label, this.options, this.required)
+		this.innerHTML = this.field_type()
 		return '<slot></slot>'
 	},
 	styles() {
