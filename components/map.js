@@ -1,3 +1,6 @@
+import css from './utils/css-prop'
+import responsive from './utils/responsive'
+
 export default {
 	component: 'c-map',
 	shadow: true,
@@ -8,7 +11,9 @@ export default {
 			embed: String,
 			hide_pins: JSON.parse,
 			location: String,
+			responsive: responsive,
 			satellite: JSON.parse,
+			vertical_alignment: (v) => css('align-self', v),
 			zoom_level: String,
 		}
 	},
@@ -27,7 +32,6 @@ export default {
 		const center = !locations.includes('|') && this.hide_pins ? 'center' : 'markers'
 		const [hor, vert] = this.aspect_ratio.split('/')
 		const height = Math.round((600 * vert) / hor)
-
 		return [
 			'https://maps.googleapis.com/maps/api/staticmap?',
 			`${center}=${locations}`,
@@ -57,6 +61,8 @@ export default {
 	styles() {
 		return `
 			:host {
+				${this.responsive}
+				${this.vertical_alignment}
 				aspect-ratio: ${this.aspect_ratio};
 				display: grid;
 				overflow: hidden;

@@ -7,16 +7,29 @@ export default {
 	shadow: true,
 	props() {
 		return {
-			desktop_format: String,
+			breakpoint: Number,
 			heading_level: String,
-			mobile_format: String,
+			layout: String,
 			responsive: responsive,
-			tablet_format: String,
-			variant: String,
+			variant: this.set_variant,
 			vertical_alignment: (v) => css('align-self', v),
 		}
 	},
+	set_variant(v) {
+		return v === 'outlined'
+			? 'box-shadow: 0 0 0 1px var(--surface-border); margin: 1px;'
+			: 'box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);'
+	},
 	template() {
+		return `
+			<style>${this.styles()}</style>
+			<slot></slot>
+		`
+	},
+	ready() {
+		const breakpoint =
+			this.breakpoint > 0 && this.layout === 'responsive' ? `breakpoint="${this.breakpoint}px"` : ''
+		const type = this.breakpoint > 0 && this.layout !== 'responsive' ? '' : `type="${this.layout}"`
 		const tabs = [...this.children]
 			.filter((tab) => tab.tagName === 'C-TAB')
 			.map((tab, i) => {
@@ -34,49 +47,22 @@ export default {
 				`
 			})
 			.join('')
-		return `
-			<style>${this.styles()}</style>
-			<snappy-tabs type="tabs">${tabs}</snappy-tabs>
+		this.innerHTML = `
+			<snappy-tabs ${[breakpoint, type].join(' ')}>
+				${tabs}
+			</snappy-tabs>
 		`
 	},
 	styles() {
 		return `
 			:host {
 				${this.responsive}
+				${this.variant}
 				${this.vertical_alignment}
-			}
-			snappy-tabs {
 				background: var(--surface);
 				border-color: var(--surface-border);
+				border-radius: 4px;
 				color: var(--on-surface);
-			}
-			snappy-tabs::part(tab) {
-				border-color: var(--surface-border);
-				font-family: var(--ui-family);
-				font-size: 14px;
-				font-weight: 500;
-				letter-spacing: 1.25px;
-				text-align: center;
-				text-transform: uppercase;
-				user-select: none;
-			}
-			snappy-tabs::part(background) {
-				background: var(--primary);
-				bottom: 0;
-				left: 0;
-				opacity: 0;
-				position: absolute;
-				right: 0;
-				top: 0;
-			}
-			snappy-tabs::part(background):hover {
-				opacity: var(--hover-opacity);
-			}
-			snappy-tabs::part(background):active {
-				opacity: var(--active-opacity);
-			}
-			snappy-tabs::part(indicator) {
-				background: var(--primary);
 			}
 		`
 	},
