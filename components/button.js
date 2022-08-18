@@ -20,21 +20,21 @@ export default {
 		const invert = '--background: transparent; --color: var(--button);'
 		switch (v) {
 			case 'icon':
-				return `
-						:host {
-							background: var(--app-bar);
-							border-radius: 24px;
-							color: var(--on-app-bar);
-							height: 48px;
-							width: 48px;
-						}
-						button {
-							padding: 0;
-						}
-						svg { height: 24px; width: 24px; }
-					`
+				return /* css */ `
+					:host {
+						background: var(--app-bar);
+						border-radius: 24px;
+						color: var(--on-app-bar);
+						height: 48px;
+						width: 48px;
+					}
+					button {
+						padding: 0;
+					}
+					svg { height: 24px; width: 24px; }
+				`
 			case 'outlined':
-				return `
+				return /* css */ `
 						:host { 
 							${invert}
 							box-shadow: 0 0 0 1px var(--button);
@@ -42,14 +42,14 @@ export default {
 						}
 					`
 			case 'raised':
-				return `
+				return /* css */ `
 						:host { 
 							box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%),
 								0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
 						}
 					`
 			case 'subtle':
-				return `
+				return /* css */ `
 						:host { color: var(--button); background: transparent; }
 						[part=background] {
 							opacity: 0.1;
@@ -64,7 +64,7 @@ export default {
 	template() {
 		const tag = this.link ? 'a' : 'button'
 		const icon_only = this.getAttribute('variant') === 'icon'
-		return `
+		return /* html */ `
 			<span part="background"></span>
 			<${tag}
 				${this.link ? ` href="${this.link}"` : ''}
@@ -76,7 +76,7 @@ export default {
 		`
 	},
 	styles() {
-		return `
+		return /* css */ `
 			:host {
 				${this.rounded}
 				${css('flex-grow', this.stretch ? 1 : 0)}

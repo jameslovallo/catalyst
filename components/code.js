@@ -14,7 +14,7 @@ export default {
 		}
 	},
 	ready() {
-		this.innerHTML = `<style>${this.css}</style>` + this.html
+		this.innerHTML = /* html */ `<style>${this.css}</style>` + this.html
 		if (this.javascript) {
 			const tag = document.createElement('script')
 			tag.type = 'module'
@@ -23,10 +23,10 @@ export default {
 		}
 	},
 	template() {
-		return '<slot></slot>'
+		return /* html */ `<slot></slot>`
 	},
 	styles() {
-		return `
+		return /* css */ `
 			:host {
 				${this.responsive}
 				${this.vertical_alignment}

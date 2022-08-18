@@ -16,7 +16,7 @@ export default {
 	template() {
 		const avatar = () => {
 			if (this.icon.icon || this.avatar.filename) {
-				return `
+				return /* html */ `
 					<span part="avatar" aria-hidden="true">
 						${this.icon.icon || ''}
 						${this.avatar.filename || ''}
@@ -24,7 +24,7 @@ export default {
 				`
 			} else return ''
 		}
-		return `
+		return /* html */ `
 			<span part="background"></span>
 			<a href="${this.link}">
 				${avatar()}
@@ -36,7 +36,7 @@ export default {
 		`
 	},
 	styles() {
-		return `
+		return /* css */ `
 			:host { display: grid }
 			:host(:not(:last-of-type)) {
 				border-bottom: var(--separator) solid var(--surface-border);

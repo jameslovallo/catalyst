@@ -21,7 +21,7 @@ export default {
 		}
 	},
 	video() {
-		return `
+		return /* html */ `
 				<video
 					autoplay="${this.autoplay}"
 					${this.controls}
@@ -37,7 +37,7 @@ export default {
 	},
 	youtube() {
 		if (this.youtube_video_id) {
-			return `
+			return /* html */ `
 					<lite-youtube
 						videoid="${this.youtube_video_id}"
 						posterquality="${this.use_hd_poster}"
@@ -49,7 +49,7 @@ export default {
 		return this.youtube() || this.video()
 	},
 	styles() {
-		return `
+		return /* css */ `
 			:host {
 				${this.responsive}
 				${this.vertical_alignment}

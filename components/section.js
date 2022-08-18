@@ -10,10 +10,10 @@ export default {
 		}
 	},
 	template() {
-		return `<span part="top"></span><slot name="content"></slot>`
+		return /* html */ `<span part="top"></span><slot name="content"></slot>`
 	},
 	styles() {
-		return `
+		return /* css */ `
 			:host {
 				${this.vertical_alignment}
 				--section: var(--${this.color});

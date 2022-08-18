@@ -34,7 +34,7 @@ export default {
 	},
 	template() {
 		const id = 'dialog-' + this.heading.replaceAll(' ', '-')
-		return `
+		return /* html */ `
 			<slot name="trigger"></slot>
 			<div
 				part="container"
@@ -60,7 +60,7 @@ export default {
 		`
 	},
 	styles() {
-		return `
+		return /* css */ `
 			:host {
 				${this.responsive}
 				${this.vertical_alignment}

@@ -19,7 +19,7 @@ export default {
 			`--field: var(--${this.color || 'primary'});`,
 			`--on-field: var(--on-${this.color || 'primary'});`,
 		].join(' ')
-		return `
+		return /* html */ `
 			<form 
 				action="https://formsubmit.co/${this.recipient}"
 				method="POST"

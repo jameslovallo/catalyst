@@ -11,7 +11,7 @@ export default {
 		}
 	},
 	template() {
-		return `<slot name="content"></slot>`
+		return /* html */ `<slot name="content"></slot>`
 	},
 	styles() {
 		return `

@@ -34,7 +34,7 @@ export default {
 			.filter((tab) => tab.tagName === 'C-TAB')
 			.map((tab, i) => {
 				tab.removeAttribute('slot')
-				return `
+				return /* html */ `
 					<details ${i === 0 ? 'open' : ''}>
 						<summary>
 							<div part="background"></div>
@@ -47,14 +47,14 @@ export default {
 				`
 			})
 			.join('')
-		this.innerHTML = `
+		this.innerHTML = /* html */ `
 			<snappy-tabs ${[breakpoint, type].join(' ')}>
 				${tabs}
 			</snappy-tabs>
 		`
 	},
 	styles() {
-		return `
+		return /* css */ `
 			:host {
 				${this.responsive}
 				${this.variant}

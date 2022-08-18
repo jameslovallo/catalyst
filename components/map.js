@@ -25,7 +25,7 @@ export default {
 			'&z=' + this.zoom_level,
 			'&ie=UTF8&output=embed',
 		].join('')
-		return `<iframe src="${src}" frameborder="0">`
+		return /* html */ `<iframe src="${src}" frameborder="0">`
 	},
 	static() {
 		const locations = this.location.split('\n').join('|')
@@ -53,13 +53,13 @@ export default {
 		})
 	},
 	template() {
-		return `
+		return /* html */ `
 			<img part="image" src="${this.static()}">
 			<button part="overlay">Tap/Click to Load</button>
 		`
 	},
 	styles() {
-		return `
+		return /* css */ `
 			:host {
 				${this.responsive}
 				${this.vertical_alignment}

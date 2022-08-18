@@ -14,10 +14,10 @@ export default {
 		}
 	},
 	template() {
-		return `<slot name="content"></slot>`
+		return /* html */ `<slot name="content"></slot>`
 	},
 	styles() {
-		return `
+		return /* css */ `
 			:host {
 				${this.responsive}
 				${this.show_dividers}

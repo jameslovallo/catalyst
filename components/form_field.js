@@ -15,7 +15,7 @@ export default {
 	field_type() {
 		const tag = this.type === 'textarea' ? 'textarea' : 'input'
 		if (['text', 'tel', 'email', 'textarea'].includes(this.type)) {
-			return `
+			return /* html */ `
 				<div class="material-input material-input--${this.type}">
 					<${tag}
 						name="${this.label}"
@@ -31,7 +31,7 @@ export default {
 				</div>
 			`
 		} else if (this.type === 'select') {
-			return `
+			return /* html */ `
 				<div class="material-input">
 					<select name="${this.label}" required="${this.required}">
 						<option selected disabled></option>
@@ -51,18 +51,18 @@ export default {
 				</div>
 			`
 		} else if (['checkbox', 'radio'].includes(this.type)) {
-			const check = `
+			const check = /* html */ `
 				<svg viewBox="0 0 24 24">
 					<path d="M1.73,12.91 8.1,19.28 22.79,4.59" />
 				</svg>
 			`
-			return `
+			return /* html */ `
 				<fieldset>
 					<legend>${this.label}</legend>
 					${this.options
 						.split('\n')
 						.map((option) => {
-							return `
+							return /* html */ `
 								<label>
 									<input type="${this.type}" name="${this.label}" />
 									${this.type === 'radio' ? `<i></i>` : ''}
@@ -103,9 +103,9 @@ export default {
 	},
 	template() {
 		this.innerHTML = this.field_type()
-		return '<slot></slot>'
+		return /* html */ `<slot></slot>`
 	},
 	styles() {
-		return `:host { ${this.responsive} }`
+		return /* css */ `:host { ${this.responsive} }`
 	},
 }

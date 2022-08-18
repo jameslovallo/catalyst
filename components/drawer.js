@@ -29,13 +29,13 @@ export default {
 		this.setAttribute('loaded', '')
 	},
 	template() {
-		return `
+		return /* html */ `
 			<div part="overlay"></div>
 			<div part="drawer"><slot></slot></div>
 		`
 	},
 	styles() {
-		return `
+		return /* css */ `
 			[part=drawer] {
 				background: var(--surface);
 				bottom: 0;

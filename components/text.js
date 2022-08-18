@@ -12,10 +12,10 @@ export default {
 		}
 	},
 	template() {
-		return `<slot></slot>`
+		return /* html */ `<slot></slot>`
 	},
 	styles() {
-		return `
+		return /* css */ `
 			:host {
 				${this.responsive}
 				${this.vertical_alignment}

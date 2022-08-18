@@ -37,10 +37,10 @@ export default {
 		)
 	},
 	template() {
-		return `<div part="image">${image(this.sbImg(), this.clientWidth)}</div>`
+		return /* html */ `<div part="image">${image(this.sbImg(), this.clientWidth)}</div>`
 	},
 	styles() {
-		return `
+		return /* css */ `
 			:host {
 				${this.responsive}
 				${this.vertical_alignment}
