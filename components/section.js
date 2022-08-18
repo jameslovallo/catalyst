@@ -23,10 +23,10 @@ export default {
 			}
 			:host([variant*=full-bleed]) {
 				--width: 100vw;
-				width: var(--width);
+				left: 50%;
 				margin-left: calc(-1 * var(--width) / 2);
 				position: relative;
-				left: 50%;
+				width: var(--width);
 			}
 			@media (min-width: 1320px) {
 				:host([variant*=full-bleed]) {
@@ -42,29 +42,33 @@ export default {
 			}
 			:host([variant*=swoop]) {
 				--swoop-curve: min(10vw, calc(3 * var(--gap)));
-				position: relative;
-				margin-top: calc(var(--swoop-curve) - var(--gap));
-				margin-bottom: calc(var(--swoop-curve) - var(--gap));
 				border-bottom-right-radius: var(--swoop-curve);
+				margin-bottom: calc(var(--swoop-curve) - var(--gap));
+				margin-top: calc(var(--swoop-curve) - var(--gap));
+				position: relative;
+			}
+			[part=top] {
+				display: none;
 			}
 			:host([variant*=swoop]) [part=top] {
-				position: absolute;
-				top: calc(-1 * var(--swoop-curve));
-				right: 0;
+				display: block;
 				height: var(--swoop-curve);
-				width: var(--swoop-curve);
 				overflow: hidden;
+				position: absolute;
+				right: 0;
+				top: calc(-1 * var(--swoop-curve));
+				width: var(--swoop-curve);
 			}
 			:host([variant*=swoop]) [part=top]:before {
+				border-radius: 50%;
+				box-shadow: 0 0 0 var(--swoop-curve) var(--section);
 				content: "";
 				display: block;
 				height: calc(2 * var(--swoop-curve));
-				width: calc(2 * var(--swoop-curve));
 				position: absolute;
-				top: calc(-1 * var(--swoop-curve));
 				right: 0;
-				border-radius: 50%;
-				box-shadow: 0 0 0 var(--swoop-curve) var(--section);
+				top: calc(-1 * var(--swoop-curve));
+				width: calc(2 * var(--swoop-curve));
 			}
 		`
 	},

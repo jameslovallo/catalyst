@@ -25,7 +25,15 @@ snappy-tabs {
 		opacity: var(--active-opacity);
 	}
 
+	&::part(panel) {
+		padding: 0;
+	}
+
 	&::part(indicator) {
 		background: var(--primary);
+	}
+
+	c-textrich {
+		padding: 1rem;
 	}
 }
