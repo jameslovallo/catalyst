@@ -35,15 +35,13 @@ export default {
 			.map((tab, i) => {
 				tab.removeAttribute('slot')
 				return /* html */ `
-					<details ${i === 0 ? 'open' : ''}>
-						<summary>
-							<div part="background"></div>
-							<h${this.heading_level}>
-								${tab.getAttribute('label')}
-							</h${this.heading_level}>
-						</summary>
+					<div part="background"></div>
+					<h${this.heading_level} slot="tab" style="font: inherit">
+						${tab.getAttribute('label')}
+					</h${this.heading_level}>
+					<div slot="panel">
 						${tab.outerHTML}
-					</details>
+					</div>
 				`
 			})
 			.join('')
