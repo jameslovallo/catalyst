@@ -67,6 +67,7 @@ export default {
 				border-radius: 50%;
 				display: grid;
 				fill: var(--on-list);
+				flex-shrink: 0;
 				height: 40px;
 				place-items: center;
 				width: 40px;

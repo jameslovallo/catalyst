@@ -132,13 +132,6 @@ function getStory() {
 				renderBloks(json.story.content.body, main)
 			}
 
-			document.querySelectorAll('nav, c-drawer').forEach((el) => {
-				el.addEventListener('click', (e) => {
-					e.preventDefault()
-					console.log(el)
-				})
-			})
-
 			import('./main')
 		})
 }

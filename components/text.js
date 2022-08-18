@@ -20,6 +20,7 @@ export default {
 				${this.responsive}
 				${this.vertical_alignment}
 				${this.alignment}
+				display: block;
 			}
 		`
 	},
