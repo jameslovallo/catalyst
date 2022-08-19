@@ -13,9 +13,10 @@ bridgeTag.addEventListener('load', () => {
 		preventClicks: true,
 	})
 	bridge.on(['input', 'change'], (payload) => {
-		if (payload.action === 'input') window.story = payload.story
+		if (payload.action === 'input') {
+			localStorage.setItem(slug + '-' + token, JSON.stringify(payload.story))
+		}
 		if (payload.action === 'change') {
-			if (window.story.name) localStorage.setItem(slug, JSON.stringify(window.story))
 			location.reload()
 		}
 	})
@@ -127,19 +128,20 @@ function getGlobal() {
 
 function getStory() {
 	const main = document.querySelector('main')
-	let story = JSON.parse(localStorage.getItem(slug))
+	let story = JSON.parse(localStorage.getItem(slug + '-' + token))
 
-	fetch(`https://api.storyblok.com/v2/cdn/stories/${slug || 'home'}?token=${token}&version=draft`)
-		.then((res) => res.json())
-		.then((json) => {
-			if (story) {
+	if (!story) {
+		fetch(`https://api.storyblok.com/v2/cdn/stories/${slug || 'home'}?token=${token}&version=draft`)
+			.then((res) => res.json())
+			.then((json) => {
+				story = json.story
 				renderBloks(story.content.body, main)
-			} else {
-				renderBloks(json.story.content.body, main)
-			}
-
-			import('./main')
-		})
+				import('./main')
+			})
+	} else {
+		renderBloks(story.content.body, main)
+		import('./main')
+	}
 }
 
 getGlobal()
