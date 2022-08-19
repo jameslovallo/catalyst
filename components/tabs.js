@@ -41,7 +41,9 @@ export default {
 				tab.removeAttribute('slot')
 				return /* html */ `
 					<div part="background"></div>
-					<h${this.heading_level} slot="tab" style="font: inherit; color: var(--on-surface);">
+					<h${this.heading_level}
+						slot="tab"
+						style="font: inherit; color: var(--on-surface);">
 						${tab.getAttribute('label')}
 					</h${this.heading_level}>
 					<div slot="panel">

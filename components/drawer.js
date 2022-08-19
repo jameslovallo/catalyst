@@ -25,7 +25,7 @@ export default {
 			const state = this.getAttribute('open')
 			state === 'false' ? this.open_drawer() : this.close_drawer()
 		})
-		this.parts.overlay.on('click', () => this.closeDrawer())
+		this.parts.overlay.on('click', () => this.close_drawer())
 		this.setAttribute('loaded', '')
 	},
 	template() {

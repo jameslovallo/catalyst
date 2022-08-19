@@ -126,21 +126,41 @@ function getGlobal() {
 		})
 }
 
-function getStory() {
-	const main = document.querySelector('main')
-	let story = JSON.parse(localStorage.getItem(slug + '-' + token))
+function storyMeta(story) {
+	const title = document.querySelector('title')
+	const tEls = document.querySelectorAll('meta[name*=title], meta[property*=title]')
+	const dEls = document.querySelectorAll('meta[name*=description], meta[property*=description]')
+	const iEls = document.querySelectorAll('meta[property*=image]')
 
+	let sTitle = story.content.SEO.title || story.name
+	sTitle = document.title ? sTitle + ' | ' + document.title : sTitle
+	title.innerText = sTitle
+	tEls.forEach((el) => el.setAttribute('content', sTitle))
+
+	const sDescription = story.content.SEO.description
+	if (sDescription) dEls.forEach((el) => el.setAttribute('content', sDescription))
+
+	const sImage = story.content.SEO_IMAGE?.filename
+	if (sImage) iEls.forEach((el) => el.setAttribute('content', sImage))
+}
+
+function renderStory(story) {
+	const main = document.querySelector('main')
+	renderBloks(story.content.body, main)
+	import('./main')
+	storyMeta(story)
+}
+
+function getStory() {
+	let story = JSON.parse(localStorage.getItem(slug + '-' + token))
 	if (!story) {
 		fetch(`https://api.storyblok.com/v2/cdn/stories/${slug || 'home'}?token=${token}&version=draft`)
 			.then((res) => res.json())
 			.then((json) => {
-				story = json.story
-				renderBloks(story.content.body, main)
-				import('./main')
+				renderStory(json.story)
 			})
 	} else {
-		renderBloks(story.content.body, main)
-		import('./main')
+		renderStory(story)
 	}
 }
 

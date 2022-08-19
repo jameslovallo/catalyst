@@ -5,6 +5,7 @@ import { JSDOM } from 'jsdom'
 const { document } = new JSDOM().window
 document.documentElement.setAttribute('lang', 'en')
 const templatePath = process.env.NETLIFY_DEV === 'true' ? './' : './dist/'
+let globalTitle
 
 fs.readFile(`${templatePath}index.html`, 'utf8', (error, data) => {
 	if (error) {
@@ -81,7 +82,8 @@ function renderBloks(array, target, slot) {
 
 function global(story) {
 	const { content } = story
-	document.head.innerHTML += `
+	globalTitle = content.SEO.title
+	document.head.innerHTML += /* html */ `
 		<link rel="icon" type="image/x-icon" href="${content.favicon?.filename}" />
 		<title>${content.SEO.title}</title>
 		<meta name="title" content="${content.SEO.title}" />
@@ -95,7 +97,7 @@ function global(story) {
 		<meta property="twitter:image" content="${content.SEO_IMAGE?.filename}" />
 		<meta property="twitter:card" content="summary_large_image" />
 	`
-	document.body.innerHTML += `
+	document.body.innerHTML += /* html */ `
 		<style>
 			:root {
 				--background: ${content.background};
@@ -120,7 +122,24 @@ function global(story) {
 	renderBloks(content.footer, document.querySelector('footer'))
 }
 
+function storyMeta(story) {
+	const tEls = document.querySelectorAll('meta[name*=title], meta[property*=title]')
+	const dEls = document.querySelectorAll('meta[name*=description], meta[property*=description]')
+	const iEls = document.querySelectorAll('meta[property*=image]')
+
+	let sTitle = story.content.SEO.title || story.name
+	document.title = globalTitle ? sTitle + ' | ' + globalTitle : sTitle
+	tEls.forEach((el) => el.setAttribute('content', sTitle))
+
+	const sDescription = story.content.SEO.description
+	if (sDescription) dEls.forEach((el) => el.setAttribute('content', sDescription))
+
+	const sImage = story.content.SEO_IMAGE?.filename
+	if (sImage) iEls.forEach((el) => el.setAttribute('content', sImage))
+}
+
 function renderStory(story) {
+	storyMeta(story)
 	const main = document.querySelector('main')
 	renderBloks(story.content.body, main)
 	const slug = story.full_slug === 'home' ? '' : story.full_slug + '/'
