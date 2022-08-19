@@ -26,17 +26,22 @@ export default {
 			<slot></slot>
 		`
 	},
-	ready() {
-		const breakpoint =
-			this.breakpoint > 0 && this.layout === 'responsive' ? `breakpoint="${this.breakpoint}px"` : ''
-		const type = this.breakpoint > 0 && this.layout !== 'responsive' ? '' : `type="${this.layout}"`
-		const tabs = [...this.children]
+	breakpointAttr() {
+		return this.breakpoint > 0 && this.layout === 'responsive'
+			? `breakpoint="${this.breakpoint}px"`
+			: ''
+	},
+	typeAttr() {
+		return `type="${this.layout}"`
+	},
+	tabs() {
+		return [...this.children]
 			.filter((tab) => tab.tagName === 'C-TAB')
 			.map((tab, i) => {
 				tab.removeAttribute('slot')
 				return /* html */ `
 					<div part="background"></div>
-					<h${this.heading_level} slot="tab" style="font: inherit">
+					<h${this.heading_level} slot="tab" style="font: inherit; color: var(--on-surface);">
 						${tab.getAttribute('label')}
 					</h${this.heading_level}>
 					<div slot="panel">
@@ -45,9 +50,12 @@ export default {
 				`
 			})
 			.join('')
+	},
+	ready() {
+		const attrs = [this.breakpointAttr(), this.typeAttr()].join(' ')
 		this.innerHTML = /* html */ `
-			<snappy-tabs ${[breakpoint, type].join(' ')}>
-				${tabs}
+			<snappy-tabs ${attrs}>
+				${this.tabs()}
 			</snappy-tabs>
 		`
 	},
