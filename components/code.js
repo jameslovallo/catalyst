@@ -14,7 +14,7 @@ export default {
 		}
 	},
 	ready() {
-		this.innerHTML = /* html */ `<style>${this.css}</style>` + this.html
+		this.innerHTML += /* html */ `<style>${this.css}</style>`
 		if (this.javascript) {
 			const tag = document.createElement('script')
 			tag.type = 'module'

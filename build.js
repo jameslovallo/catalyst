@@ -43,7 +43,7 @@ function renderBloks(array, target, slot) {
 		const attrs = Object.keys(blok).filter((key) => !['component', '_uid'].includes(key))
 
 		attrs.forEach((attr) => {
-			const value = blok[attr]
+			let value = blok[attr]
 
 			if (typeof value === 'boolean') {
 				el.setAttribute(attr, value)
@@ -69,6 +69,10 @@ function renderBloks(array, target, slot) {
 				.replace('{c}', '©')
 				.replace('{year}', new Date().getFullYear())
 			el.removeAttribute('text')
+		}
+
+		if (blok.component === 'Code') {
+			el.innerHTML = blok.html
 		}
 
 		target.appendChild(el)

@@ -66,6 +66,11 @@ function renderBloks(array, target, slot) {
 				.replace('{year}', new Date().getFullYear())
 			el.removeAttribute('text')
 		}
+
+		if (blok.component === 'Code') {
+			el.innerHTML = blok.html
+		}
+
 		target.appendChild(el)
 	})
 }
