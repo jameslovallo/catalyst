@@ -58,6 +58,7 @@ function renderBloks(array, target, slot) {
 				if (Array.isArray(value) && value[0]?.component) {
 					renderBloks(value, el, attr)
 				} else {
+					if (Array.isArray(value) && value.length === 0) value = null
 					el.setAttribute(attr, JSON.stringify(value))
 				}
 			}

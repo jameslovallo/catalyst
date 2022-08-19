@@ -39,7 +39,7 @@ function renderBloks(array, target, slot) {
 		)
 
 		attrs.forEach((attr) => {
-			const value = blok[attr]
+			let value = blok[attr]
 
 			if (typeof value === 'boolean') {
 				el.setAttribute(attr, value)
@@ -54,6 +54,7 @@ function renderBloks(array, target, slot) {
 				if (Array.isArray(value) && value[0]?.component) {
 					renderBloks(value, el, attr)
 				} else {
+					if (Array.isArray(value) && value.length === 0) value = null
 					el.setAttribute(attr, JSON.stringify(value))
 				}
 			}
