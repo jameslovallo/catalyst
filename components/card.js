@@ -48,6 +48,10 @@ export default {
 				padding: 8px;
 				display: flex;
 			}
+			[name=content]:empty,
+			[name=actions]:empty {
+				display: none;
+			}
 		`
 	},
 }
