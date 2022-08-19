@@ -156,8 +156,7 @@ function write(html, path) {
 
 	const stream = fs.createWriteStream(out + 'index.html')
 	stream.once('open', () => {
-		var content = html
-		stream.end(content)
+		stream.end('<!DOCTYPE html>' + html)
 	})
 }
 
