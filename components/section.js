@@ -1,12 +1,9 @@
-import css from './utils/css-prop'
-
 export default {
 	component: 'c-section',
 	shadow: true,
 	props() {
 		return {
 			color: String,
-			vertical_alignment: (v) => css('align-self', v),
 		}
 	},
 	template() {
@@ -15,7 +12,6 @@ export default {
 	styles() {
 		return /* css */ `
 			:host {
-				${this.vertical_alignment}
 				--section: var(--${this.color});
 				--on-section: var(--on-${this.color});
 				background: var(--section);

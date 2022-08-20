@@ -1,4 +1,3 @@
-import css from './utils/css-prop'
 import responsive from './utils/responsive'
 
 export default {
@@ -7,7 +6,7 @@ export default {
 	props() {
 		return {
 			responsive: responsive,
-			vertical_alignment: (v) => css('align-self', v),
+			vertical_alignment: String,
 		}
 	},
 	template() {
@@ -17,7 +16,7 @@ export default {
 		return `
 			:host {
 				${this.responsive}
-				${this.vertical_alignment}
+				align-self: ${this.vertical_alignment}
 			}
 		`
 	},

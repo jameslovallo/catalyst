@@ -12,13 +12,13 @@
 	},
 	"devDependencies": {
 		"@justinribeiro/lite-youtube": "^1.4.0",
-		"@snappywc/composer": "^1.0.17",
-		"@snappywc/tabs": "^1.0.10",
-		"@storyblok/js": "^1.7.1",
-		"a11y-dialog": "^7.5.1",
+		"@snappywc/composer": "^1.0.21",
+		"@snappywc/tabs": "^1.0.12",
+		"@storyblok/js": "^1.7.2",
+		"a11y-dialog": "^7.5.2",
 		"jsdom": "^20.0.0",
-		"sass": "^1.54.4",
+		"sass": "^1.54.5",
 		"tua-body-scroll-lock": "^1.2.1",
-		"vite": "^3.0.5"
+		"vite": "^3.0.9"
 	}
 }

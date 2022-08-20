@@ -1,5 +1,4 @@
 import '@justinribeiro/lite-youtube'
-import css from './utils/css-prop'
 import responsive from './utils/responsive'
 
 export default {
@@ -14,7 +13,7 @@ export default {
 			plays_inline: String,
 			responsive: responsive,
 			use_hd_poster: (v) => (v === 'true' ? 'maxresdefault' : 'hqdefault'),
-			vertical_alignment: (v) => css('align-self', v),
+			vertical_alignment: String,
 			video_files: JSON.parse,
 			video_poster: JSON.parse,
 			youtube_video_id: (v) => v || undefined,
@@ -52,7 +51,7 @@ export default {
 		return /* css */ `
 			:host {
 				${this.responsive}
-				${this.vertical_alignment}
+				align-self: ${this.vertical_alignment};
 				aspect-ratio: 16/9;
 			}
 			video { display: block; width: 100%; }

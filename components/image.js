@@ -1,4 +1,3 @@
-import css from './utils/css-prop'
 import debounce from './utils/debounce'
 import image from './utils/image'
 import responsive from './utils/responsive'
@@ -16,7 +15,7 @@ export default {
 			image: JSON.parse,
 			responsive: responsive,
 			saturation: String,
-			vertical_alignment: (v) => css('align-self', v),
+			vertical_alignment: String,
 		}
 	},
 	sbImg() {

@@ -1,6 +1,5 @@
 import A11yDialog from 'a11y-dialog'
 import { lock, unlock } from 'tua-body-scroll-lock'
-import css from './utils/css-prop'
 import responsive from './utils/responsive'
 
 export default {
@@ -12,7 +11,7 @@ export default {
 			trigger_title: String,
 			close_button_text: String,
 			responsive: responsive,
-			vertical_alignment: (v) => css('align-self', v),
+			vertical_alignment: String,
 		}
 	},
 	show() {
@@ -63,7 +62,7 @@ export default {
 		return /* css */ `
 			:host {
 				${this.responsive}
-				${this.vertical_alignment}
+				align-self: ${this.vertical_alignment}
 			}
 			[part=container] { z-index: 99999; }
 			[part=container][aria-hidden="true"] {

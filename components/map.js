@@ -1,4 +1,3 @@
-import css from './utils/css-prop'
 import responsive from './utils/responsive'
 
 export default {
@@ -13,7 +12,7 @@ export default {
 			location: String,
 			responsive: responsive,
 			satellite: JSON.parse,
-			vertical_alignment: (v) => css('align-self', v),
+			vertical_alignment: String,
 			zoom_level: String,
 		}
 	},
@@ -62,7 +61,7 @@ export default {
 		return /* css */ `
 			:host {
 				${this.responsive}
-				${this.vertical_alignment}
+				align-self: ${this.vertical_alignment};
 				aspect-ratio: ${this.aspect_ratio};
 				display: grid;
 				overflow: hidden;

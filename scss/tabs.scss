@@ -1,9 +1,13 @@
 snappy-tabs {
-	border-width: 0;
-	color: var(--surface-border);
+	--border-color: var(--surface-border);
+	--indicator-color: var(--primary);
 
-	* {
-		color: var(--on-surface);
+	background: var(--surface);
+	border-radius: 4px;
+	color: var(--on-surface);
+
+	&::part(panel) {
+		padding: 0;
 	}
 
 	&::part(tab) {
@@ -20,29 +24,16 @@ snappy-tabs {
 		text-align: center;
 	}
 
-	&::part(background) {
-		background: var(--primary);
-		grid-area: 1/-1;
-		opacity: 0;
-	}
-
-	&::part(background):hover {
-		opacity: var(--hover-opacity);
-	}
-
-	&::part(background):active {
-		opacity: var(--active-opacity);
-	}
-
-	&::part(panel) {
-		padding: 0;
-	}
-
-	&::part(indicator) {
-		background: var(--primary);
-	}
-
 	c-textrich {
 		padding: 1rem;
+	}
+}
+
+c-tabs {
+	&[variant='elevated'] {
+		snappy-tabs {
+			box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%),
+				0px 1px 3px 0px rgb(0 0 0 / 12%);
+		}
 	}
 }

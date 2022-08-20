@@ -1,5 +1,4 @@
 import '@snappywc/tabs'
-import css from './utils/css-prop'
 import responsive from './utils/responsive'
 
 export default {
@@ -11,14 +10,8 @@ export default {
 			heading_level: String,
 			layout: String,
 			responsive: responsive,
-			variant: this.set_variant,
-			vertical_alignment: (v) => css('align-self', v),
+			vertical_alignment: String,
 		}
-	},
-	set_variant(v) {
-		return v === 'outlined'
-			? 'box-shadow: 0 0 0 1px var(--surface-border); margin: 1px;'
-			: 'box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);'
 	},
 	template() {
 		return `
@@ -40,7 +33,6 @@ export default {
 			.map((tab, i) => {
 				tab.removeAttribute('slot')
 				return /* html */ `
-					<div part="background"></div>
 					<h${this.heading_level}
 						slot="tab"
 						style="font: inherit; color: var(--on-surface);">
@@ -65,12 +57,7 @@ export default {
 		return /* css */ `
 			:host {
 				${this.responsive}
-				${this.variant}
-				${this.vertical_alignment}
-				background: var(--surface);
-				border-color: var(--surface-border);
-				border-radius: 4px;
-				color: var(--on-surface);
+				align-self: ${this.vertical_alignment};
 			}
 		`
 	},

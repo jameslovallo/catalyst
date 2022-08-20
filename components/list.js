@@ -10,7 +10,7 @@ export default {
 			responsive: responsive,
 			role: () => 'list',
 			show_dividers: (v) => css('--separator', JSON.parse(v) ? '1px' : '0'),
-			vertical_alignment: (v) => css('align-self', v),
+			vertical_alignment: String,
 		}
 	},
 	template() {
@@ -21,9 +21,9 @@ export default {
 			:host {
 				${this.responsive}
 				${this.show_dividers}
-				${this.vertical_alignment}
 				--list: var(--${this.color});
 				--on-list: var(--on-${this.color});
+				align-self: ${this.vertical_alignment};
 				list-style: none;
 				margin: 0;
 				padding: 8px 0;

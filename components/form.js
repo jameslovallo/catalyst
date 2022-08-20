@@ -1,4 +1,3 @@
-import css from './utils/css-prop'
 import responsive from './utils/responsive'
 
 export default {
@@ -10,8 +9,13 @@ export default {
 			recipient: String,
 			responsive: responsive,
 			subject: String,
-			vertical_alignment: (v) => css('align-self', v),
+			vertical_alignment: String,
 		}
+	},
+	ready() {
+		this.querySelector('c-button').addEventListener('click', () => {
+			this.parts.submit.click()
+		})
 	},
 	template() {
 		this.setAttribute('style', this.responsive + this.vertical_alignment)
@@ -30,9 +34,11 @@ export default {
 			</form>
 		`
 	},
-	ready() {
-		this.querySelector('c-button').addEventListener('click', () => {
-			this.parts.submit.click()
-		})
+	styles() {
+		return /* css */ `
+			:host {
+				align-self: ${this.vertical_alignment}
+			}
+		`
 	},
 }

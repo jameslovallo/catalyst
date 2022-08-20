@@ -8,7 +8,7 @@ export default {
 		return {
 			alignment: (v) => css('text-align', v),
 			responsive: responsive,
-			vertical_alignment: (v) => css('align-self', v),
+			vertical_alignment: String,
 		}
 	},
 	template() {
@@ -18,8 +18,8 @@ export default {
 		return /* css */ `
 			:host {
 				${this.responsive}
-				${this.vertical_alignment}
 				${this.alignment}
+				align-self: ${this.vertical_alignment};
 				display: block;
 			}
 		`
