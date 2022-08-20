@@ -21,8 +21,8 @@ export default {
 			:host {
 				${this.responsive}
 				${this.show_dividers}
-				--list: var(--${this.color});
-				--on-list: var(--on-${this.color});
+				--list: var(--${this.color || 'primary'});
+				--on-list: var(--on-${this.color || 'primary'});
 				align-self: ${this.vertical_alignment};
 				list-style: none;
 				margin: 0;
