@@ -12,7 +12,7 @@
 	},
 	"devDependencies": {
 		"@justinribeiro/lite-youtube": "^1.4.0",
-		"@snappywc/composer": "^1.0.21",
+		"@snappywc/composer": "^1.0.22",
 		"@snappywc/tabs": "^1.0.12",
 		"@storyblok/js": "^1.7.2",
 		"a11y-dialog": "^7.5.2",
