@@ -9,7 +9,7 @@ export default {
 			color: (v) => (v ? v : 'primary'),
 			responsive: responsive,
 			role: () => 'list',
-			show_dividers: (v) => css('--separator', JSON.parse(v) ? '1px' : '0'),
+			show_dividers: JSON.parse,
 			vertical_alignment: String,
 		}
 	},
@@ -20,7 +20,7 @@ export default {
 		return /* css */ `
 			:host {
 				${this.responsive}
-				${this.show_dividers}
+				${css('--separator', this.show_dividers ? '1px' : '0')}
 				--list: var(--${this.color || 'primary'});
 				--on-list: var(--on-${this.color || 'primary'});
 				align-self: ${this.vertical_alignment};

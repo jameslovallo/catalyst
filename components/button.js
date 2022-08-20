@@ -10,7 +10,7 @@ export default {
 			icon: JSON.parse,
 			label: String,
 			link: link,
-			rounded: (v) => css('border-radius', v === 'true' ? '18px' : '4px'),
+			rounded: JSON.parse,
 			stretch: JSON.parse,
 			trailing_icon: JSON.parse,
 			variant: this.set_variant,
@@ -79,7 +79,7 @@ export default {
 	styles() {
 		return /* css */ `
 			:host {
-				${this.rounded}
+				${css('border-radius', this.rounded ? '18px' : '4px')}
 				${css('flex-grow', this.stretch ? 1 : 0)}
 				--button: var(--${this.color});
 				--on-button: var(--on-${this.color});
