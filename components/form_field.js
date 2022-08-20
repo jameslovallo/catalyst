@@ -5,11 +5,11 @@ export default {
 	shadow: true,
 	props() {
 		return {
-			type: String,
 			label: String,
 			options: String,
 			required: JSON.parse,
 			responsive: responsive,
+			type: String,
 		}
 	},
 	field_type() {

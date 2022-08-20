@@ -7,10 +7,10 @@ export default {
 	shadow: true,
 	props() {
 		return {
-			heading: String,
-			trigger_title: String,
 			close_button_text: String,
+			heading: String,
 			responsive: responsive,
+			trigger_title: String,
 			vertical_alignment: String,
 		}
 	},
