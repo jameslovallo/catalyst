@@ -15,11 +15,14 @@ export default {
 	},
 	template() {
 		const avatar = () => {
+			const img = () => /* html */ `
+				<img src="${this.avatar.filename || ''}">
+			`
 			if (this.icon?.icon || this.avatar?.filename) {
 				return /* html */ `
 					<span part="avatar" aria-hidden="true">
 						${this.icon.icon || ''}
-						${this.avatar.filename || ''}
+						${this.avatar.filename ? img : ''}
 					</span>
 				`
 			} else return ''
@@ -72,8 +75,12 @@ export default {
 				place-items: center;
 				width: 40px;
 			}
+			[part=avatar] svg {
+				height: 24px;
+				width: 24px;
+			}
 			[part=content] { display: block; }
-			[part="text"] {
+			[part=text] {
 				letter-spacing: .15px;
 				line-height: 24px;
 			}
