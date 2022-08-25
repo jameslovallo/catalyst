@@ -112,6 +112,8 @@ export default {
 				padding: 16px 20px;
 			}
 			[name=content] {
+				border-bottom: 1px solid var(--surface-border);
+				border-top: 1px solid var(--surface-border);
 				display: block;
 				flex-grow: 1;
 				overflow-y: auto;
