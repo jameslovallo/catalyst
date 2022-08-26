@@ -20,7 +20,6 @@ export default {
 		return /* css */ `
 			:host {
 				${this.responsive}
-				${this.variant}
 				align-self: ${this.vertical_alignment};
 				background: var(--surface, white);
 				border-radius: 4px;
