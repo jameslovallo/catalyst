@@ -49,6 +49,7 @@ export default {
 				font-family: system-ui;
 				font-size: 14px;
 				font-weight: 500;
+				gap: 8px;
 				grid-area: 1/-1;
 				justify-content: center;
 				letter-spacing: 1.25px;
@@ -56,6 +57,13 @@ export default {
 				text-decoration: none;
 				text-transform: uppercase;
 				user-select: none;
+			}
+
+			/* icon */
+			svg {
+				fill: currentcolor;
+				height: 18px;
+				width: 18px;
 			}
 
 			/* background pseudo element */
@@ -139,12 +147,6 @@ export default {
 
 			:host([stretch=true]) {
 				flex-grow: 1;
-			}
-
-			svg {
-				fill: currentcolor;
-				height: 18px;
-				width: 18px;
 			}
 		`
 	},
