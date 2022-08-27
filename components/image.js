@@ -42,7 +42,7 @@ export default {
 		return /* css */ `
 			:host {
 				${this.responsive}
-				${this.vertical_alignment}
+				align-self: ${this.vertical_alignment};
 			}
 			img {
 				aspect-ratio: ${this.aspect_ratio};

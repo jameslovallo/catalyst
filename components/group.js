@@ -13,7 +13,7 @@ export default {
 		return /* html */ `<slot name="content"></slot>`
 	},
 	styles() {
-		return `
+		return /* css */ `
 			:host {
 				${this.responsive}
 				align-self: ${this.vertical_alignment}
