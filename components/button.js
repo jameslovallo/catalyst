@@ -20,7 +20,7 @@ export default {
 				${icon_only ? ` aria-label="${this.label}"` : ''}
 			>
 				${this.icon?.icon ? this.icon.icon : ''}
-				${this.label && !icon_only ? `<span>${this.label}</span>` : ''}
+				${this.label && !icon_only ? `${this.label}` : ''}
 			</${tag}>
 		`
 	},
@@ -37,7 +37,6 @@ export default {
 			}
 
 			/* the link itself */
-
 			[part=button] {
 				align-items: center;
 				background: transparent;
@@ -52,7 +51,9 @@ export default {
 				grid-area: 1/-1;
 				justify-content: center;
 				letter-spacing: 1.25px;
+				line-height: 1;
 				padding: 0 8px;
+				text-align: center;
 				text-decoration: none;
 				text-transform: uppercase;
 				user-select: none;
@@ -66,7 +67,6 @@ export default {
 			}
 
 			/* background pseudo element */
-
 			:host:before {
 				background: var(--button-bg, currentcolor);
 				content: '';
@@ -75,17 +75,14 @@ export default {
 				opacity: 0;
 				pointer-events: none;
 			}
-
 			:host(:hover):before {
 				opacity: var(--hover-opacity);
 			}
-
 			:host(:active):before {
 				opacity: var(--active-opacity);
 			}
 
 			/* unelevated and raised */
-
 			:host([variant=unelevated]),
 			:host([variant=raised]) {
 				--button-bg: var(--on-button);
@@ -94,7 +91,6 @@ export default {
 			}
 
 			/* raised */
-
 			:host([variant=raised]) {
 				box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%),
 					0px 2px 2px 0px rgb(0 0 0 / 14%),
@@ -102,7 +98,6 @@ export default {
 			}
 
 			/* outlined */
-
 			:host([variant=outlined]) {
 				--button-bg: var(--button);
 				box-shadow: inset 0 0 0 2px var(--button);
@@ -110,7 +105,6 @@ export default {
 			}
 
 			/* subtle */
-
 			:host([variant=subtle]) {
 				--button-bg: var(--button);
 				color: var(--button);
@@ -126,30 +120,25 @@ export default {
 			}
 
 			/* text */
-
 			:host([variant=text]) {
 				--button-bg: var(--button);
 				color: var(--button);
 			}
 
 			/* rounded */
-
 			:host([rounded=true]) {
 				border-radius: 18px;
 			}
-
 			:host([rounded=true]) [part=button] {
 				padding: 0 16px;
 			}
 
 			/* stretch */
-
 			:host([stretch=true]) {
 				flex-grow: 1;
 			}
 
 			/* trailing icon */
-
 			:host([trailing_icon=true]) [part=button] {
 				flex-direction: row-reverse;
 			}
