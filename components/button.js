@@ -9,7 +9,6 @@ export default {
 			icon: JSON.parse,
 			label: String,
 			link: link,
-			trailing_icon: JSON.parse,
 		}
 	},
 	template() {
@@ -31,7 +30,7 @@ export default {
 				--button: var(--${this.color});
 				--on-button: var(--on-${this.color});
 				border-radius: 4px;
-				display: grid;
+				display: inline-grid;
 				height: 36px;
 				overflow: hidden;
 				width: max-content;
@@ -147,6 +146,12 @@ export default {
 
 			:host([stretch=true]) {
 				flex-grow: 1;
+			}
+
+			/* trailing icon */
+
+			:host([trailing_icon=true]) [part=button] {
+				flex-direction: row-reverse;
 			}
 		`
 	},
