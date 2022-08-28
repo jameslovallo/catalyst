@@ -142,6 +142,23 @@ export default {
 			:host([trailing_icon=true]) [part=button] {
 				flex-direction: row-reverse;
 			}
+
+			/* icon_only */
+			:host([variant=icon]) {
+				background: transparent;
+				border-radius: 50%;
+				color: var(--on-button);
+				height: 48px;
+			}
+			:host([variant=icon]) [part=button] {
+				height: 48px;
+				padding: 0;
+				width: 48px;
+			}
+			:host([variant=icon]) [part=button] svg {
+				height: 24px;
+				width: 24px;
+			}
 		`
 	},
 }
