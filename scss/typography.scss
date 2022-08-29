@@ -5,13 +5,13 @@
 }
 // prettier-ignore
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-	display: block;
-	font-family: var(--heading-font);
-	color: var(--heading-color);
-	margin: 0;
-	line-height: 1.2;
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-font-smoothing: antialiased;
+	color: var(--heading-color);
+	display: block;
+	font-family: var(--heading-font);
+	line-height: 1.2;
+	margin: 0;
 
 	.grid>.text &:first-child:last-child {
 		margin: 0;
@@ -105,8 +105,8 @@ h6,
 }
 
 .p {
-	font-size: 16px;
 	display: block;
+	font-size: 16px;
 }
 
 .small {
@@ -114,16 +114,16 @@ h6,
 }
 
 .truncate {
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
 	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 blockquote {
+	border-left: 4px solid var(--primary);
 	margin: 1em 0;
 	padding: 1px 0 1px 2em;
-	border-left: 4px solid var(--primary);
 }
 
 c-section a {

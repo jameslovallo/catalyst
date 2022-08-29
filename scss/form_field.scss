@@ -25,17 +25,17 @@ form > c-button {
 	select,
 	textarea {
 		appearance: none;
-		display: block;
-		width: calc(100% - var(--padding) * 2);
-		height: 48px;
-		width: 100%;
+		background: transparent;
 		border-radius: var(--border-radius);
 		border: none;
-		font-size: 16px;
-		padding: 0 var(--padding);
-		margin: 0;
-		background: transparent;
 		color: inherit;
+		display: block;
+		font-size: 16px;
+		height: 48px;
+		margin: 0;
+		padding: 0 var(--padding);
+		width: 100%;
+		width: calc(100% - var(--padding) * 2);
 
 		&:focus {
 			outline: none;
@@ -43,29 +43,21 @@ form > c-button {
 
 		&:required + div > label > span:after {
 			content: '*';
-			position: relative;
 			left: 0.1em;
+			position: relative;
 			transform: scale(0.5);
 		}
 	}
 
 	select {
-		width: 100%;
 		color: inherit;
+		width: 100%;
 
 		option {
 			color: initial;
 		}
 
 		~ i {
-			content: '';
-			display: block;
-			height: 6px;
-			width: 6px;
-			position: absolute;
-			right: 12px;
-			top: calc(50% - 4px);
-			transform: rotate(45deg);
 			background: linear-gradient(
 				to bottom right,
 				transparent 0%,
@@ -73,47 +65,55 @@ form > c-button {
 				currentColor 50%,
 				currentColor 100%
 			);
+			content: '';
+			display: block;
+			height: 6px;
+			position: absolute;
+			right: 12px;
+			top: calc(50% - 4px);
+			transform: rotate(45deg);
+			width: 6px;
 		}
 	}
 
 	&-outline {
-		position: absolute;
+		display: flex;
+		height: 100%;
 		left: 0;
+		pointer-events: none;
+		position: absolute;
 		top: 0;
 		width: 100%;
-		height: 100%;
-		display: flex;
-		pointer-events: none;
 
 		&:before,
 		&:after {
+			border: var(--border-width) solid var(--border-color);
 			content: '';
 			width: var(--padding);
-			border: var(--border-width) solid var(--border-color);
 		}
 
 		&:before {
+			border-bottom-left-radius: var(--border-radius);
 			border-right: none;
 			border-top-left-radius: var(--border-radius);
-			border-bottom-left-radius: var(--border-radius);
 		}
 
 		&:after {
-			flex-grow: 1;
+			border-bottom-right-radius: var(--border-radius);
 			border-left: none;
 			border-top-right-radius: var(--border-radius);
-			border-bottom-right-radius: var(--border-radius);
+			flex-grow: 1;
 		}
 
 		label {
-			display: flex;
 			align-items: center;
-			border-top: var(--border-width) solid var(--border-color);
 			border-bottom: var(--border-width) solid var(--border-color);
+			border-top: var(--border-width) solid var(--border-color);
+			display: flex;
 
 			span {
-				will-change: transform;
 				transition: transform 0.25s;
+				will-change: transform;
 			}
 		}
 	}
@@ -158,8 +158,8 @@ form > c-button {
 
 		&:after {
 			content: attr(data-replicated-value) ' ';
-			white-space: pre-wrap;
 			visibility: hidden;
+			white-space: pre-wrap;
 		}
 
 		label {
@@ -168,15 +168,16 @@ form > c-button {
 		}
 
 		textarea {
-			resize: none;
-			min-height: 7.25em;
-			max-height: none;
 			height: auto;
+			max-height: none;
+			min-height: 7.25em;
 			overflow-y: hidden;
+			resize: none;
 		}
 
 		&:after,
 		textarea {
+			box-sizing: border-box;
 			font: inherit;
 			grid-area: 1 / 1 / 2 / 2;
 			padding: 14px var(--padding);
@@ -201,9 +202,9 @@ form > c-button {
 
 	input:not(:focus):not(:placeholder-shown):invalid,
 	input:not(:focus):not(:placeholder-shown):invalid + .material-input-outline {
-		will-change: transform;
-		animation: headShake 1s;
 		animation-timing-function: ease-in-out;
+		animation: headShake 1s;
+		will-change: transform;
 	}
 }
 
@@ -215,23 +216,18 @@ form > c-button {
 	0% {
 		transform: translateX(0);
 	}
-
 	6.5% {
 		transform: translateX(-6px);
 	}
-
 	18.5% {
 		transform: translateX(5px);
 	}
-
 	31.5% {
 		transform: translateX(-3px);
 	}
-
 	43.5% {
 		transform: translateX(2px);
 	}
-
 	50% {
 		transform: translateX(0);
 	}
