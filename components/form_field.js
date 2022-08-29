@@ -37,9 +37,7 @@ export default {
 						<option selected disabled></option>
 						${this.options
 							.split('\n')
-							.map((option) => {
-								return `<option>${option}</option>`
-							})
+							.map((option) => /* html */ `<option>${option}</option>`)
 							.join('')}
 					</select>
 					<div class="material-input-outline">
