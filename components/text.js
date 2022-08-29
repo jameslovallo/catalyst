@@ -19,7 +19,7 @@ export default {
 				${this.responsive}
 				align-self: ${this.vertical_alignment};
 				display: block;
-				text-align: ${this.alignment}
+				text-align: ${this.alignment};
 			}
 		`
 	},

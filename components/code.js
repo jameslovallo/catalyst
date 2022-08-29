@@ -28,7 +28,7 @@ export default {
 		return /* css */ `
 			:host {
 				${this.responsive}
-				align-self: ${this.vertical_alignment}
+				align-self: ${this.vertical_alignment};
 				display: block;
 			}
 		`

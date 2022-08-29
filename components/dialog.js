@@ -62,7 +62,7 @@ export default {
 		return /* css */ `
 			:host {
 				${this.responsive}
-				align-self: ${this.vertical_alignment}
+				align-self: ${this.vertical_alignment};
 			}
 			[part=container] { z-index: 99999; }
 			[part=container][aria-hidden="true"] {

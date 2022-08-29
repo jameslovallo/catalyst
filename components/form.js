@@ -37,7 +37,7 @@ export default {
 	styles() {
 		return /* css */ `
 			:host {
-				align-self: ${this.vertical_alignment}
+				align-self: ${this.vertical_alignment};
 			}
 		`
 	},
