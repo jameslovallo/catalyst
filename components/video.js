@@ -30,7 +30,7 @@ export default {
 					poster="${this.video_poster?.filename + '/m/'}"
 					preload="auto"
 				>
-					${this.video_files?.map((src) => `<source src="${src?.filename}"/>`).join()}
+					${this.video_files?.map((src) => /* html */ `<source src="${src?.filename}"/>`).join()}
 				</video>
 			`
 	},
