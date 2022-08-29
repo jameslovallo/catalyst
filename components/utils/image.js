@@ -37,7 +37,7 @@ export default (p, w) => {
 	w = Math.round(w / 100) * 100 * devicePixelRatio
 
 	if (!filename.endsWith('svg')) {
-		return `
+		return /* html */ `
 			<img
 				src="${src(w)}"
 				alt="${i.alt}"
@@ -45,5 +45,5 @@ export default (p, w) => {
 				width="${width}px"
 			>
 		`
-	} else return `<img src="${filename}" alt="${i.alt}">`
+	} else return /* html */ `<img src="${filename}" alt="${i.alt}">`
 }

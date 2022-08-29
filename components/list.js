@@ -1,4 +1,3 @@
-import css from './utils/css-prop'
 import responsive from './utils/responsive'
 
 export default {
@@ -20,12 +19,10 @@ export default {
 		return /* css */ `
 			:host {
 				${this.responsive}
-				${css('--separator', this.show_dividers ? '1px' : '0')}
+				--separator: ${this.show_dividers ? '1px' : '0'};
 				--list: var(--${this.color || 'primary'});
 				--on-list: var(--on-${this.color || 'primary'});
 				align-self: ${this.vertical_alignment};
-				list-style: none;
-				margin: 0;
 				padding: 8px 0;
 			}
 		`
