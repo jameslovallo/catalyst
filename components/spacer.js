@@ -7,4 +7,7 @@ export default {
 	template() {
 		return /* html */ `<div style="height: ${this.height}px"></div>`
 	},
+	styles() {
+		return /* css */ `:host {display: block}`
+	},
 }

@@ -16,6 +16,7 @@ export default {
 				--on-section: var(--on-${this.color});
 				background: var(--section);
 				color: var(--on-section);
+				display: block;
 			}
 			:host([variant*=full-bleed]) {
 				--width: 100vw;

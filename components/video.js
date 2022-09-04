@@ -53,6 +53,7 @@ export default {
 				${this.responsive}
 				align-self: ${this.vertical_alignment};
 				aspect-ratio: 16/9;
+				display: block;
 			}
 			video { display: block; width: 100%; }
 		`

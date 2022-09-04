@@ -115,3 +115,7 @@ c-button + c-button {
 c-button[variant='text'] + c-button[variant='text'] {
 	margin-left: 0;
 }
+
+c-card c-list[slot='content'] {
+	margin: 0 -16px;
+}

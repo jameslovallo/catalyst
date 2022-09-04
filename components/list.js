@@ -23,6 +23,7 @@ export default {
 				--list: var(--${this.color || 'primary'});
 				--on-list: var(--on-${this.color || 'primary'});
 				align-self: ${this.vertical_alignment};
+				display: block;
 				padding: 8px 0;
 			}
 		`

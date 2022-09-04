@@ -31,6 +31,7 @@ export default {
 				position: relative;
 			}
 			[name=content] {
+				display: block;
 				flex-grow: 1;
 				padding: 16px 16px 0;
 			}
@@ -38,9 +39,10 @@ export default {
 				padding-bottom: 16px;
 			}
 			[name=actions] {
-				padding: 8px;
 				display: flex;
+				padding: 8px;
 			}
+			:host([content=null]) [name=content],
 			:host([actions=null]) [name=actions] {
 				display: none;
 			}

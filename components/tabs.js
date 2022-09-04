@@ -58,6 +58,7 @@ export default {
 			:host {
 				${this.responsive}
 				align-self: ${this.vertical_alignment};
+				display: block;
 			}
 		`
 	},

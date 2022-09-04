@@ -21,8 +21,8 @@ export default {
 			if (this.icon?.icon || this.avatar?.filename) {
 				return /* html */ `
 					<span part="avatar" aria-hidden="true">
-						${this.icon.icon || ''}
-						${this.avatar.filename ? img : ''}
+						${this.icon?.icon || ''}
+						${this.avatar?.filename ? img() : ''}
 					</span>
 				`
 			} else return ''
@@ -32,7 +32,7 @@ export default {
 			<a href="${this.link}">
 				${avatar()}
 				<span part="content">
-					<span part="text">${this.text}</span><br>
+					<span part="text">${this.text}</span>
 					<span part="secondary-text">${this.secondary_text || ''}</span>
 				</span>
 			</a>
@@ -72,7 +72,14 @@ export default {
 				fill: var(--on-list);
 				flex-shrink: 0;
 				height: 40px;
+				object-position: center center;
+				overflow: hidden;
 				place-items: center;
+				width: 40px;
+			}
+			[part=avatar] img {
+				height: 40px;
+				object-fit: cover;
 				width: 40px;
 			}
 			[part=avatar] svg {
@@ -81,10 +88,12 @@ export default {
 			}
 			[part=content] { display: block; }
 			[part=text] {
+				display: block;
 				letter-spacing: .15px;
 				line-height: 24px;
 			}
 			[part=secondary-text] {
+				display: block;
 				font-size: 14px;
 				letter-spacing: .25px;
 				line-height: normal;

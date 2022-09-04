@@ -137,6 +137,9 @@ export default {
 			:host([stretch=true]) {
 				flex-grow: 1;
 			}
+			:host([stretch=true]) [part=button] {
+				justify-content: space-between;
+			}
 
 			/* trailing icon */
 			:host([trailing_icon=true]) [part=button] {
