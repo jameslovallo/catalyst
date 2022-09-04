@@ -68,10 +68,6 @@ function renderBloks(array, target, slot) {
 			el.removeAttribute('text')
 		}
 
-		if (blok.component === 'Code') {
-			el.innerHTML = blok.html
-		}
-
 		target.appendChild(el)
 	})
 }
@@ -148,6 +144,11 @@ function storyMeta(story) {
 function renderStory(story) {
 	const main = document.querySelector('main')
 	renderBloks(story.content.body, main)
+	const cCodes = main.querySelectorAll('c-code')
+	cCodes.forEach((el) => {
+		const children = [...el.children].map((child) => `<div>${child.outerHTML}</div>`).join('')
+		el.innerHTML = el.getAttribute('html').replace('<slot></slot>', children)
+	})
 	import('./main')
 	storyMeta(story)
 }
