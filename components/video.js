@@ -1,4 +1,3 @@
-import '@justinribeiro/lite-youtube'
 import responsive from './utils/responsive'
 
 export default {
@@ -37,11 +36,8 @@ export default {
 	youtube() {
 		if (this.youtube_video_id) {
 			return /* html */ `
-					<lite-youtube
-						videoid="${this.youtube_video_id}"
-						posterquality="${this.use_hd_poster}"
-					></lite-youtube>
-				`
+				<youtube-lite vid="${this.youtube_video_id}"></youtube-lite>
+			`
 		} else return false
 	},
 	template() {

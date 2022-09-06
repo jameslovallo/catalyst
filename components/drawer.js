@@ -31,7 +31,9 @@ export default {
 	template() {
 		return /* html */ `
 			<div part="overlay"></div>
-			<div part="drawer"><slot></slot></div>
+			<div part="drawer">
+				<slot></slot>
+			</div>
 		`
 	},
 	styles() {
